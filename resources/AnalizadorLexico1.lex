@@ -72,7 +72,7 @@ AtributoCerrado = {Slash}{Atributo}
 Atributos = {A}{T}{R}{I}{B}{U}{T}{O}{S}
 AtributosCerrado = {Slash}{Atributos}
 NumeroHexadecimal = ("#")({Letra}|{Digito})+
-Identificador = ({Letra}|{Digito})({Letra}|{Digito}|"-"|"_"|"$")*
+Identificador = ({Letra})({Letra}|{Digito}|"-"|"_"|"$")*
 
 
 %% // separador de areas
@@ -119,6 +119,7 @@ Identificador = ({Letra}|{Digito})({Letra}|{Digito}|"-"|"_"|"$")*
 	"\"" {return symbol(COMILLAS, yytext());}
 	"[" {return symbol(CORCHETE_ABIERTO, yytext());}
 	"]" {return symbol(CORCHETE_CERRADO, yytext());}
+	"|" {return symbol(OR, yytext());}
 	{Accion} {return symbol(ACCION_ABIERTO, yytext());}
 	{AccionCerrado} {return symbol(ACCION_CERRADO, yytext());}
 	{Acciones} {return symbol(ACCIONES_ABIERTO, yytext());}
@@ -139,6 +140,7 @@ Identificador = ({Letra}|{Digito})({Letra}|{Digito}|"-"|"_"|"$")*
 	{Valor} {return symbol(VALOR, yytext());}
 	{NumeroHexadecimal} {return symbol(NUMERO_HEXADECIMAL, yytext());}
 	{Identificador} {return symbol(IDENTIFICADOR, yytext());}
+	{Digito} {return symbol(NUMERO, yytext());}
 	{WhiteSpace} 		{/*Nothing to do*/}
 	{LineTerminator} 	{/*Nothing to do*/}
 

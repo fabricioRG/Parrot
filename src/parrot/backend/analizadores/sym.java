@@ -9,6 +9,7 @@ package parrot.backend.analizadores;
 public class sym {
   /* terminals */
   public static final int ETIQUETAS_CERRADO = 53;
+  public static final int NUMERO = 61;
   public static final int ETIQUETA_ABIERTO = 50;
   public static final int BORRAR_PAGINA = 5;
   public static final int ALINEACION = 25;
@@ -27,6 +28,7 @@ public class sym {
   public static final int IDENTIFICADOR = 60;
   public static final int SIGNO_IGUAL = 37;
   public static final int CENTRAR = 31;
+  public static final int OR = 62;
   public static final int TITULO = 11;
   public static final int ETIQUETAS_ABIERTO = 52;
   public static final int PADRE = 13;
@@ -130,7 +132,9 @@ public class sym {
   "ATRIBUTOS_CERRADO",
   "VALOR",
   "NUMERO_HEXADECIMAL",
-  "IDENTIFICADOR"
+  "IDENTIFICADOR",
+  "NUMERO",
+  "OR"
   };
 }
 
