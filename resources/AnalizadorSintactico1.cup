@@ -1,0 +1,150 @@
+package parrot.backend.analizadores;
+
+import java_cup.runtime.*;
+import parrot.backend.analizadores.sym;
+import parrot.backend.manejadores.*;
+
+parser code {:
+
+	private ManejadorParser mp = null;
+
+
+	// Connect this parser to a scanner!
+	public parser(Lexer1 lex, ManejadorParser mp) {
+		super(lex);
+		this.mp = mp;
+	}
+
+        public void syntax_error(Symbol cur_token) {
+        	this.mp.showErrorMessege("Error sintactico en <" + cur_token.value + ">");
+            System.out.println("Error sintactico en <" + cur_token.value + ">");
+        }
+
+:}
+
+/* Terminals (tokens returned by the scanner). */
+terminal String         NUEVO_SITIO_WEB, BORRAR_SITIO_WEB, NUEVA_PAGINA, BORRAR_PAGINA;
+terminal String         MODIFICAR_PAGINA, AGREGAR_COMPONENTE, BORRAR_COMPONENTE, MODIFICAR_COMPONENTE;
+terminal String         ID_TEXTO, TITULO, SITIO, PADRE, USUARIO_CREACION, FECHA_CREACION;
+terminal String 		FECHA_MODIFICACION, USUARIO_MODIFICACION, PAGINA, CLASE, PARRAFO;
+terminal String 		IMAGEN, VIDEO, MENU, TEXTO, ALINEACION, COLOR, ORIGEN, ALTURA, ANCHO;
+terminal String 		ETIQUETAS, CENTRAR, IZQUIERDA, DERECHA, JUSTIFICAR, SIGNO_MENOR;
+terminal String 		SIGNO_MAYOR, SIGNO_IGUAL, COMILLAS, CORCHETE_ABIERTO, CORCHETE_CERRADO;
+terminal String 		ACCION_ABIERTO, ACCION_CERRADO, ACCIONES_ABIERTO, ACCIONES_CERRADO;
+terminal String 		NOMBRE, PARAMETRO_ABIERTO, PARAMETRO_CERRADO, PARAMETROS_ABIERTO;
+terminal String 		PARAMETROS_CERRADO, ETIQUETA_ABIERTO, ETIQUETA_CERRADO, ETIQUETAS_ABIERTO;
+terminal String 		ETIQUETAS_CERRADO, ATRIBUTO_ABIERTO, ATRIBUTO_CERRADO, ATRIBUTOS_ABIERTO;
+terminal String 		ATRIBUTOS_CERRADO, VALOR, NUMERO_HEXADECIMAL, IDENTIFICADOR;
+
+non terminal String 		main, main2, mainAux, main3, palabraRes;
+non terminal String 		op, op1, op2, op2Aux, op3, op4, op5, op6, op7;
+
+start with main;
+
+/* INICIO GRAMATICA DE -----MAIN----- */
+
+main ::= 	SIGNO_MENOR ACCIONES_ABIERTO SIGNO_MAYOR main2 SIGNO_MENOR ACCIONES_CERRADO SIGNO_MAYOR
+			| main3 SIGNO_MENOR ACCION_CERRADO SIGNO_MAYOR
+			;
+
+main2 ::=	main2 main3 mainAux
+			| main3 mainAux
+			;
+
+mainAux ::= SIGNO_MENOR ACCION_CERRADO SIGNO_MAYOR {:System.out.println("</accion>");:}
+			;
+
+main3 ::=	op
+			;
+/* INICIO GRAMTICA DE -----COMPONENTES----- */
+
+op ::=	op1 op2 SIGNO_MENOR PARAMETROS_CERRADO SIGNO_MAYOR {:System.out.println("</parametros>");:}
+			;
+
+op1 ::=		op3 SIGNO_MENOR PARAMETROS_ABIERTO SIGNO_MAYOR {:System.out.println("<parametros>");:}
+			;
+
+op2 ::=		op2 op4 op2Aux
+			| op4 op2Aux
+			;
+
+op2Aux ::=	SIGNO_MENOR PARAMETRO_CERRADO SIGNO_MAYOR {:System.out.println("</parametro>");:}
+			;
+ 
+op3 ::=		SIGNO_MENOR ACCION_ABIERTO NOMBRE SIGNO_IGUAL COMILLAS NUEVO_SITIO_WEB COMILLAS SIGNO_MAYOR {:System.out.println("<accion nombre = 'NUEVO_SITIO_WEB'>");:}
+			;
+
+op4 ::=		SIGNO_MENOR PARAMETRO_ABIERTO NOMBRE SIGNO_IGUAL op5 {:System.out.println("<parametro nombre = ");:}
+			;
+
+op5 ::=		COMILLAS op6:e1 COMILLAS SIGNO_MAYOR op7 {:RESULT = e1; System.out.print("'" + RESULT +"' >");:}
+			;
+
+op6 ::=		ID_TEXTO:e1 {:RESULT = e1;:}
+			| USUARIO_CREACION:e2 {:RESULT = e2;:}
+			| FECHA_CREACION:e3 {:RESULT = e3;:}
+			| FECHA_MODIFICACION:e4 {:RESULT = e4;:}
+			| USUARIO_MODIFICACION:e5 {:RESULT = e5;:}
+			;
+
+op7 ::=		CORCHETE_ABIERTO TEXTO CORCHETE_CERRADO {:System.out.println("[TEXTO]");:}
+			;
+
+/* -----PALABRAS RESERVADAS DEL SISTEMA------ */
+
+palabraRes ::=	NUEVO_SITIO_WEB
+				| BORRAR_SITIO_WEB
+				| NUEVA_PAGINA
+				| BORRAR_PAGINA
+				| MODIFICAR_PAGINA
+				| AGREGAR_COMPONENTE
+				| BORRAR_COMPONENTE
+				| MODIFICAR_COMPONENTE
+				| ID_TEXTO
+				| TITULO
+				| SITIO
+				| PADRE
+				| USUARIO_CREACION
+				| FECHA_CREACION
+				| FECHA_MODIFICACION
+				| USUARIO_MODIFICACION
+				| PAGINA
+				| CLASE
+				| PARRAFO
+				| IMAGEN
+				| VIDEO
+				| MENU
+				| TEXTO
+				| ALINEACION
+				| COLOR
+				| ORIGEN
+				| ALTURA
+				| ANCHO
+				| ETIQUETAS
+				| CENTRAR
+				| IZQUIERDA
+				| DERECHA
+				| JUSTIFICAR
+				| SIGNO_MENOR
+				| SIGNO_MAYOR
+				| SIGNO_IGUAL
+				| ACCION_ABIERTO
+				| ACCION_CERRADO
+				| ACCIONES_ABIERTO
+				| ACCIONES_CERRADO
+				| NOMBRE
+				| PARAMETRO_ABIERTO
+				| PARAMETRO_CERRADO
+				| PARAMETROS_ABIERTO
+				| PARAMETROS_CERRADO
+				| ETIQUETA_ABIERTO
+				| ETIQUETA_CERRADO
+				| ETIQUETAS_ABIERTO
+				| ETIQUETAS_CERRADO
+				| ATRIBUTO_ABIERTO
+				| ATRIBUTO_CERRADO
+				| ATRIBUTOS_ABIERTO
+				| ATRIBUTOS_CERRADO
+				| NUMERO_HEXADECIMAL
+				| IDENTIFICADOR
+				;
