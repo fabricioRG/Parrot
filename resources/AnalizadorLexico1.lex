@@ -34,7 +34,9 @@ import static parrot.backend.analizadores.sym.*;
 LineTerminator = \r|\n|\r\n
 WhiteSpace = [ \t\f]
 Letra = [a-zA-Z]
+Entero = [0-9]
 Digito = [1-9][0-9]*
+TextoParametro = "[" [^*] ~"]" | "[" "]"
 A = "A" | "a"
 B = "B" | "b"
 C = "C" | "c"
@@ -53,6 +55,9 @@ U = "U" | "u"
 V = "V" | "v"
 X = "X" | "x"
 Slash = "/"
+Space = ({WhiteSpace})*
+CorcheteAbierto = "["
+CorcheteCerrado = "]"
 Accion = {A}{C}{C}{I}{O}{N}
 AccionCerrado = {Slash}{Accion}
 Acciones = {A}{C}{C}{I}{O}{N}{E}{S}
@@ -71,9 +76,22 @@ Atributo = {A}{T}{R}{I}{B}{U}{T}{O}
 AtributoCerrado = {Slash}{Atributo}
 Atributos = {A}{T}{R}{I}{B}{U}{T}{O}{S}
 AtributosCerrado = {Slash}{Atributos}
-NumeroHexadecimal = ("#")({Letra}|{Digito})+
+LetraNumero = ({Letra}|{Entero})
+NumeroHexadecimal = "#" {LetraNumero}{LetraNumero}{LetraNumero}{LetraNumero}{LetraNumero}{LetraNumero}
+Fecha = {CorcheteAbierto}{Space}{Entero}{Entero}{Entero}{Entero} "-" {Entero}{Entero} "-" {Entero}{Space}{CorcheteCerrado}
+HexadecimalParametro = {CorcheteAbierto} {Space} {NumeroHexadecimal} {Space} {CorcheteCerrado}
 Identificador = ({Letra})({Letra}|{Digito}|"-"|"_"|"$")*
-
+IdentificadorParametro = {CorcheteAbierto} {Space} {Identificador} {Space} {CorcheteCerrado}
+EnteroParametro = {CorcheteAbierto} {Space} {Digito} {Space} {CorcheteCerrado}
+Titulo = {CorcheteAbierto} {Space} "TITULO" {Space} {CorcheteCerrado}
+Parrafo = {CorcheteAbierto} {Space} "PARRAFO" {Space} {CorcheteCerrado}
+Imagen = {CorcheteAbierto} {Space} "IMAGEN" {Space} {CorcheteCerrado}
+Video = {CorcheteAbierto} {Space} "VIDEO" {Space} {CorcheteCerrado}
+Menu = {CorcheteAbierto} {Space} "MENU" {Space} {CorcheteCerrado}
+Centrar = {CorcheteAbierto} {Space} "CENTRAR" {Space} {CorcheteCerrado}
+Izquierda = {CorcheteAbierto} {Space} "IZQUIERDA" {Space} {CorcheteCerrado}
+Derecha = {CorcheteAbierto} {Space} "DERECHA" {Space} {CorcheteCerrado}
+Justificar = {CorcheteAbierto} {Space} "JUSTIFICAR" {Space} {CorcheteCerrado}
 
 %% // separador de areas
 
@@ -98,10 +116,6 @@ Identificador = ({Letra})({Letra}|{Digito}|"-"|"_"|"$")*
 	"USUARIO_MODIFICACION" {return symbol(USUARIO_MODIFICACION, yytext());}
 	"PAGINA" {return symbol(PAGINA, yytext());}
 	"CLASE" {return symbol(CLASE, yytext());}
-	"PARRAFO" {return symbol(PARRAFO, yytext());}
-	"IMAGEN" {return symbol(IMAGEN, yytext());}
-	"VIDEO" {return symbol(VIDEO, yytext());}
-	"MENU" {return symbol(MENU, yytext());}
 	"TEXTO" {return symbol(TEXTO, yytext());}
 	"ALINEACION" {return symbol(ALINEACION, yytext());}
 	"COLOR" {return symbol(COLOR, yytext());}
@@ -109,17 +123,15 @@ Identificador = ({Letra})({Letra}|{Digito}|"-"|"_"|"$")*
 	"ALTURA" {return symbol(ALTURA, yytext());}
 	"ANCHO" {return symbol(ANCHO, yytext());}
 	"ETIQUETAS" {return symbol(ETIQUETAS, yytext());}
-	"CENTRAR" {return symbol(CENTRAR, yytext());}
-	"IZQUIERDA" {return symbol(IZQUIERDA, yytext());}
-	"DERECHA" {return symbol(DERECHA, yytext());}
-	"JUSTIFICAR" {return symbol(JUSTIFICAR, yytext());}
 	"<" {return symbol(SIGNO_MENOR, yytext());}
 	">" {return symbol(SIGNO_MAYOR, yytext());}
 	"=" {return symbol(SIGNO_IGUAL, yytext());}
 	"\"" {return symbol(COMILLAS, yytext());}
-	"[" {return symbol(CORCHETE_ABIERTO, yytext());}
-	"]" {return symbol(CORCHETE_CERRADO, yytext());}
 	"|" {return symbol(OR, yytext());}
+	{Centrar} {return symbol(CENTRAR_PARAMETRO, yytext());}
+	{Izquierda} {return symbol(IZQUIERDA_PARAMETRO, yytext());}
+	{Derecha} {return symbol(DERECHA_PARAMETRO, yytext());}
+	{Justificar} {return symbol(JUSTIFICAR_PARAMETRO, yytext());}
 	{Accion} {return symbol(ACCION_ABIERTO, yytext());}
 	{AccionCerrado} {return symbol(ACCION_CERRADO, yytext());}
 	{Acciones} {return symbol(ACCIONES_ABIERTO, yytext());}
@@ -138,9 +150,16 @@ Identificador = ({Letra})({Letra}|{Digito}|"-"|"_"|"$")*
 	{Atributos} {return symbol(ATRIBUTOS_ABIERTO, yytext());}
 	{AtributosCerrado} {return symbol(ATRIBUTOS_CERRADO, yytext());}
 	{Valor} {return symbol(VALOR, yytext());}
-	{NumeroHexadecimal} {return symbol(NUMERO_HEXADECIMAL, yytext());}
-	{Identificador} {return symbol(IDENTIFICADOR, yytext());}
-	{Digito} {return symbol(NUMERO, yytext());}
+	{Fecha} {return symbol(FECHA_PARAMETRO, yytext());}
+	{HexadecimalParametro} {return symbol(HEXADECIMAL_PARAMETRO, yytext());}
+	{Titulo} {return symbol(TITULO_PARAMETRO, yytext());}
+	{Parrafo} {return symbol(PARRAFO_PARAMETRO, yytext());}
+	{Imagen} {return symbol(IMAGEN_PARAMETRO, yytext());}
+	{Video} {return symbol(VIDEO_PARAMETRO, yytext());}
+	{Menu} {return symbol(MENU_PARAMETRO, yytext());}
+	{IdentificadorParametro} {return symbol(IDENTIFICADOR, yytext());}
+	{EnteroParametro} {return symbol(ENTERO_PARAMETRO, yytext());}
+	{TextoParametro} {return symbol(TEXTO_PARAMETRO, yytext());}
 	{WhiteSpace} 		{/*Nothing to do*/}
 	{LineTerminator} 	{/*Nothing to do*/}
 
