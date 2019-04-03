@@ -80,7 +80,7 @@ LetraNumero = ({Letra}|{Entero})
 NumeroHexadecimal = "#" {LetraNumero}{LetraNumero}{LetraNumero}{LetraNumero}{LetraNumero}{LetraNumero}
 Fecha = {CorcheteAbierto}{Space}{Entero}{Entero}{Entero}{Entero} "-" {Entero}{Entero} "-" {Entero}{Space}{CorcheteCerrado}
 HexadecimalParametro = {CorcheteAbierto} {Space} {NumeroHexadecimal} {Space} {CorcheteCerrado}
-Identificador = ({Letra})({Letra}|{Digito}|"-"|"_"|"$")*
+Identificador = {Letra}({Letra}|{Digito}|"-"|"_"|"$")*
 IdentificadorParametro = {CorcheteAbierto} {Space} {Identificador} {Space} {CorcheteCerrado}
 EnteroParametro = {CorcheteAbierto} {Space} {Digito} {Space} {CorcheteCerrado}
 Titulo = {CorcheteAbierto} {Space} "TITULO" {Space} {CorcheteCerrado}
@@ -149,6 +149,7 @@ Justificar = {CorcheteAbierto} {Space} "JUSTIFICAR" {Space} {CorcheteCerrado}
 	{AtributoCerrado} {return symbol(ATRIBUTO_CERRADO, yytext());}
 	{Atributos} {return symbol(ATRIBUTOS_ABIERTO, yytext());}
 	{AtributosCerrado} {return symbol(ATRIBUTOS_CERRADO, yytext());}
+	"/"	{return symbol(SLASH, yytext());}
 	{Valor} {return symbol(VALOR, yytext());}
 	{Fecha} {return symbol(FECHA_PARAMETRO, yytext());}
 	{HexadecimalParametro} {return symbol(HEXADECIMAL_PARAMETRO, yytext());}

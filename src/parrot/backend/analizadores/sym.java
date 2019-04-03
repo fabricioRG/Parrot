@@ -16,6 +16,7 @@ public class sym {
   public static final int PARAMETROS_CERRADO = 50;
   public static final int ACCIONES_ABIERTO = 44;
   public static final int HEXADECIMAL_PARAMETRO = 60;
+  public static final int SLASH = 66;
   public static final int ATRIBUTOS_ABIERTO = 57;
   public static final int CORCHETE_CERRADO = 41;
   public static final int NOMBRE = 46;
@@ -140,7 +141,8 @@ public class sym {
   "ENTERO_PARAMETRO",
   "OR",
   "TEXTO_PARAMETRO",
-  "FECHA_PARAMETRO"
+  "FECHA_PARAMETRO",
+  "SLASH"
   };
 }
 

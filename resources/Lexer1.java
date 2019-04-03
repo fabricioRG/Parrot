@@ -57,21 +57,21 @@ public class Lexer1 implements java_cup.runtime.Scanner {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\1\0\1\1\2\2\24\1\1\3\1\4\1\5\1\6"+
-    "\1\7\5\0\1\10\23\0\1\11\17\0\1\10\2\0"+
-    "\1\12\3\0\1\13\135\0\1\14\3\0\1\15\1\16"+
-    "\11\0\1\17\1\20\1\21\2\0\1\22\13\0\1\23"+
-    "\6\0\1\24\1\0\1\25\6\0\1\26\2\0\1\27"+
-    "\1\0\1\30\1\31\15\0\1\32\17\0\1\33\10\0"+
-    "\1\34\3\0\1\35\3\0\1\36\1\0\1\37\4\0"+
-    "\2\40\15\0\1\41\2\0\1\42\1\43\1\0\1\44"+
-    "\2\0\1\45\4\0\1\46\1\47\3\0\1\50\2\0"+
-    "\1\51\1\52\1\53\6\0\1\54\7\0\1\55\2\0"+
-    "\1\56\1\57\1\60\2\0\1\61\1\0\1\62\13\0"+
-    "\1\63\3\0\1\64\6\0\1\65\7\0\1\66\20\0"+
-    "\1\67\6\0\1\70\5\0\1\71\1\0\1\72\1\73"+
-    "\3\0\1\74\3\0\1\75\2\0\1\76\2\0\1\77"+
-    "\1\100";
+    "\1\0\1\1\2\2\22\1\1\3\1\1\1\4\1\5"+
+    "\1\6\1\7\1\10\5\0\1\11\23\0\1\12\17\0"+
+    "\1\11\2\0\1\13\3\0\1\14\135\0\1\15\3\0"+
+    "\1\16\1\17\11\0\1\20\1\21\1\22\2\0\1\23"+
+    "\13\0\1\24\6\0\1\25\1\0\1\26\6\0\1\27"+
+    "\2\0\1\30\1\0\1\31\1\32\15\0\1\33\17\0"+
+    "\1\34\10\0\1\35\3\0\1\36\3\0\1\37\1\0"+
+    "\1\40\4\0\2\41\15\0\1\42\2\0\1\43\1\44"+
+    "\1\0\1\45\2\0\1\46\4\0\1\47\1\50\3\0"+
+    "\1\51\2\0\1\52\1\53\1\54\6\0\1\55\7\0"+
+    "\1\56\2\0\1\57\1\60\1\61\2\0\1\62\1\0"+
+    "\1\63\13\0\1\64\3\0\1\65\6\0\1\66\7\0"+
+    "\1\67\20\0\1\70\6\0\1\71\5\0\1\72\1\0"+
+    "\1\73\1\74\3\0\1\75\3\0\1\76\2\0\1\77"+
+    "\2\0\1\100\1\101";
 
   private static int [] zzUnpackAction() {
     int [] result = new int[423];
@@ -910,259 +910,263 @@ public class Lexer1 implements java_cup.runtime.Scanner {
           case 1: 
             { error("Simbolo invalido <"+ yytext()+">");
             }
-          case 65: break;
+          case 66: break;
           case 2: 
             { /*Nothing to do*/
             }
-          case 66: break;
-          case 3: 
-            { return symbol(SIGNO_MENOR, yytext());
-            }
           case 67: break;
-          case 4: 
-            { return symbol(SIGNO_MAYOR, yytext());
+          case 3: 
+            { return symbol(SLASH, yytext());
             }
           case 68: break;
-          case 5: 
-            { return symbol(SIGNO_IGUAL, yytext());
+          case 4: 
+            { return symbol(SIGNO_MENOR, yytext());
             }
           case 69: break;
-          case 6: 
-            { return symbol(COMILLAS, yytext());
+          case 5: 
+            { return symbol(SIGNO_MAYOR, yytext());
             }
           case 70: break;
-          case 7: 
-            { return symbol(OR, yytext());
+          case 6: 
+            { return symbol(SIGNO_IGUAL, yytext());
             }
           case 71: break;
-          case 8: 
-            { return symbol(TEXTO_PARAMETRO, yytext());
+          case 7: 
+            { return symbol(COMILLAS, yytext());
             }
           case 72: break;
-          case 9: 
-            { return symbol(ID_TEXTO, yytext());
+          case 8: 
+            { return symbol(OR, yytext());
             }
           case 73: break;
-          case 10: 
-            { return symbol(IDENTIFICADOR, yytext());
+          case 9: 
+            { return symbol(TEXTO_PARAMETRO, yytext());
             }
           case 74: break;
-          case 11: 
-            { return symbol(ENTERO_PARAMETRO, yytext());
+          case 10: 
+            { return symbol(ID_TEXTO, yytext());
             }
           case 75: break;
-          case 12: 
-            { return symbol(ANCHO, yytext());
+          case 11: 
+            { return symbol(IDENTIFICADOR, yytext());
             }
           case 76: break;
-          case 13: 
-            { return symbol(CLASE, yytext());
+          case 12: 
+            { return symbol(ENTERO_PARAMETRO, yytext());
             }
           case 77: break;
-          case 14: 
-            { return symbol(COLOR, yytext());
+          case 13: 
+            { return symbol(ANCHO, yytext());
             }
           case 78: break;
-          case 15: 
-            { return symbol(PADRE, yytext());
+          case 14: 
+            { return symbol(CLASE, yytext());
             }
           case 79: break;
-          case 16: 
-            { return symbol(SITIO, yytext());
+          case 15: 
+            { return symbol(COLOR, yytext());
             }
           case 80: break;
-          case 17: 
-            { return symbol(TEXTO, yytext());
+          case 16: 
+            { return symbol(PADRE, yytext());
             }
           case 81: break;
-          case 18: 
-            { return symbol(VALOR, yytext());
+          case 17: 
+            { return symbol(SITIO, yytext());
             }
           case 82: break;
-          case 19: 
-            { return symbol(MENU_PARAMETRO, yytext());
+          case 18: 
+            { return symbol(TEXTO, yytext());
             }
           case 83: break;
-          case 20: 
-            { return symbol(ACCION_ABIERTO, yytext());
+          case 19: 
+            { return symbol(VALOR, yytext());
             }
           case 84: break;
-          case 21: 
-            { return symbol(ALTURA, yytext());
+          case 20: 
+            { return symbol(MENU_PARAMETRO, yytext());
             }
           case 85: break;
-          case 22: 
-            { return symbol(NOMBRE, yytext());
+          case 21: 
+            { return symbol(ACCION_ABIERTO, yytext());
             }
           case 86: break;
-          case 23: 
-            { return symbol(ORIGEN, yytext());
+          case 22: 
+            { return symbol(ALTURA, yytext());
             }
           case 87: break;
-          case 24: 
-            { return symbol(PAGINA, yytext());
+          case 23: 
+            { return symbol(NOMBRE, yytext());
             }
           case 88: break;
-          case 25: 
-            { return symbol(TITULO, yytext());
+          case 24: 
+            { return symbol(ORIGEN, yytext());
             }
           case 89: break;
-          case 26: 
-            { return symbol(VIDEO_PARAMETRO, yytext());
+          case 25: 
+            { return symbol(PAGINA, yytext());
             }
           case 90: break;
-          case 27: 
-            { return symbol(ACCION_CERRADO, yytext());
+          case 26: 
+            { return symbol(TITULO, yytext());
             }
           case 91: break;
-          case 28: 
-            { return symbol(IMAGEN_PARAMETRO, yytext());
+          case 27: 
+            { return symbol(VIDEO_PARAMETRO, yytext());
             }
           case 92: break;
-          case 29: 
-            { return symbol(TITULO_PARAMETRO, yytext());
+          case 28: 
+            { return symbol(ACCION_CERRADO, yytext());
             }
           case 93: break;
-          case 30: 
-            { return symbol(ACCIONES_ABIERTO, yytext());
+          case 29: 
+            { return symbol(IMAGEN_PARAMETRO, yytext());
             }
           case 94: break;
-          case 31: 
-            { return symbol(ATRIBUTO_ABIERTO, yytext());
+          case 30: 
+            { return symbol(TITULO_PARAMETRO, yytext());
             }
           case 95: break;
-          case 32: 
-            { return symbol(ETIQUETA_ABIERTO, yytext());
+          case 31: 
+            { return symbol(ACCIONES_ABIERTO, yytext());
             }
           case 96: break;
-          case 33: 
-            { return symbol(CENTRAR_PARAMETRO, yytext());
+          case 32: 
+            { return symbol(ATRIBUTO_ABIERTO, yytext());
             }
           case 97: break;
-          case 34: 
-            { return symbol(PARRAFO_PARAMETRO, yytext());
+          case 33: 
+            { return symbol(ETIQUETA_ABIERTO, yytext());
             }
           case 98: break;
-          case 35: 
-            { return symbol(HEXADECIMAL_PARAMETRO, yytext());
+          case 34: 
+            { return symbol(CENTRAR_PARAMETRO, yytext());
             }
           case 99: break;
-          case 36: 
-            { return symbol(DERECHA_PARAMETRO, yytext());
+          case 35: 
+            { return symbol(PARRAFO_PARAMETRO, yytext());
             }
           case 100: break;
-          case 37: 
-            { return symbol(ATRIBUTOS_ABIERTO, yytext());
+          case 36: 
+            { return symbol(HEXADECIMAL_PARAMETRO, yytext());
             }
           case 101: break;
-          case 38: 
-            { return symbol(ETIQUETAS, yytext());
+          case 37: 
+            { return symbol(DERECHA_PARAMETRO, yytext());
             }
           case 102: break;
-          case 39: 
-            { return symbol(ETIQUETAS_ABIERTO, yytext());
+          case 38: 
+            { return symbol(ATRIBUTOS_ABIERTO, yytext());
             }
           case 103: break;
-          case 40: 
-            { return symbol(PARAMETRO_ABIERTO, yytext());
+          case 39: 
+            { return symbol(ETIQUETAS, yytext());
             }
           case 104: break;
-          case 41: 
-            { return symbol(ACCIONES_CERRADO, yytext());
+          case 40: 
+            { return symbol(ETIQUETAS_ABIERTO, yytext());
             }
           case 105: break;
-          case 42: 
-            { return symbol(ATRIBUTO_CERRADO, yytext());
+          case 41: 
+            { return symbol(PARAMETRO_ABIERTO, yytext());
             }
           case 106: break;
-          case 43: 
-            { return symbol(ETIQUETA_CERRADO, yytext());
+          case 42: 
+            { return symbol(ACCIONES_CERRADO, yytext());
             }
           case 107: break;
-          case 44: 
-            { return symbol(ALINEACION, yytext());
+          case 43: 
+            { return symbol(ATRIBUTO_CERRADO, yytext());
             }
           case 108: break;
-          case 45: 
-            { return symbol(PARAMETROS_ABIERTO, yytext());
+          case 44: 
+            { return symbol(ETIQUETA_CERRADO, yytext());
             }
           case 109: break;
-          case 46: 
-            { return symbol(ATRIBUTOS_CERRADO, yytext());
+          case 45: 
+            { return symbol(ALINEACION, yytext());
             }
           case 110: break;
-          case 47: 
-            { return symbol(ETIQUETAS_CERRADO, yytext());
+          case 46: 
+            { return symbol(PARAMETROS_ABIERTO, yytext());
             }
           case 111: break;
-          case 48: 
-            { return symbol(PARAMETRO_CERRADO, yytext());
+          case 47: 
+            { return symbol(ATRIBUTOS_CERRADO, yytext());
             }
           case 112: break;
-          case 49: 
-            { return symbol(FECHA_PARAMETRO, yytext());
+          case 48: 
+            { return symbol(ETIQUETAS_CERRADO, yytext());
             }
           case 113: break;
-          case 50: 
-            { return symbol(IZQUIERDA_PARAMETRO, yytext());
+          case 49: 
+            { return symbol(PARAMETRO_CERRADO, yytext());
             }
           case 114: break;
-          case 51: 
-            { return symbol(PARAMETROS_CERRADO, yytext());
+          case 50: 
+            { return symbol(FECHA_PARAMETRO, yytext());
             }
           case 115: break;
-          case 52: 
-            { return symbol(JUSTIFICAR_PARAMETRO, yytext());
+          case 51: 
+            { return symbol(IZQUIERDA_PARAMETRO, yytext());
             }
           case 116: break;
-          case 53: 
-            { return symbol(NUEVA_PAGINA, yytext());
+          case 52: 
+            { return symbol(PARAMETROS_CERRADO, yytext());
             }
           case 117: break;
-          case 54: 
-            { return symbol(BORRAR_PAGINA, yytext());
+          case 53: 
+            { return symbol(JUSTIFICAR_PARAMETRO, yytext());
             }
           case 118: break;
-          case 55: 
-            { return symbol(FECHA_CREACION, yytext());
+          case 54: 
+            { return symbol(NUEVA_PAGINA, yytext());
             }
           case 119: break;
-          case 56: 
-            { return symbol(NUEVO_SITIO_WEB, yytext());
+          case 55: 
+            { return symbol(BORRAR_PAGINA, yytext());
             }
           case 120: break;
-          case 57: 
-            { return symbol(BORRAR_SITIO_WEB, yytext());
+          case 56: 
+            { return symbol(FECHA_CREACION, yytext());
             }
           case 121: break;
-          case 58: 
-            { return symbol(MODIFICAR_PAGINA, yytext());
+          case 57: 
+            { return symbol(NUEVO_SITIO_WEB, yytext());
             }
           case 122: break;
-          case 59: 
-            { return symbol(USUARIO_CREACION, yytext());
+          case 58: 
+            { return symbol(BORRAR_SITIO_WEB, yytext());
             }
           case 123: break;
-          case 60: 
-            { return symbol(BORRAR_COMPONENTE, yytext());
+          case 59: 
+            { return symbol(MODIFICAR_PAGINA, yytext());
             }
           case 124: break;
-          case 61: 
-            { return symbol(AGREGAR_COMPONENTE, yytext());
+          case 60: 
+            { return symbol(USUARIO_CREACION, yytext());
             }
           case 125: break;
-          case 62: 
-            { return symbol(FECHA_MODIFICACION, yytext());
+          case 61: 
+            { return symbol(BORRAR_COMPONENTE, yytext());
             }
           case 126: break;
-          case 63: 
-            { return symbol(MODIFICAR_COMPONENTE, yytext());
+          case 62: 
+            { return symbol(AGREGAR_COMPONENTE, yytext());
             }
           case 127: break;
-          case 64: 
-            { return symbol(USUARIO_MODIFICACION, yytext());
+          case 63: 
+            { return symbol(FECHA_MODIFICACION, yytext());
             }
           case 128: break;
+          case 64: 
+            { return symbol(MODIFICAR_COMPONENTE, yytext());
+            }
+          case 129: break;
+          case 65: 
+            { return symbol(USUARIO_MODIFICACION, yytext());
+            }
+          case 130: break;
           default:
             zzScanError(ZZ_NO_MATCH);
         }
