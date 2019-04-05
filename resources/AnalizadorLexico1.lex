@@ -37,6 +37,7 @@ Letra = [a-zA-Z]
 Entero = [0-9]
 Digito = [1-9][0-9]*
 TextoParametro = "[" [^*] ~"]" | "[" "]"
+TextoString = "\"" [^*] ~"\"" | "\"" "\""
 A = "A" | "a"
 B = "B" | "b"
 C = "C" | "c"
@@ -55,6 +56,7 @@ U = "U" | "u"
 V = "V" | "v"
 X = "X" | "x"
 Slash = "/"
+Comillas = "\""
 Space = ({WhiteSpace})*
 CorcheteAbierto = "["
 CorcheteCerrado = "]"
@@ -78,7 +80,7 @@ Atributos = {A}{T}{R}{I}{B}{U}{T}{O}{S}
 AtributosCerrado = {Slash}{Atributos}
 LetraNumero = ({Letra}|{Entero})
 NumeroHexadecimal = "#" {LetraNumero}{LetraNumero}{LetraNumero}{LetraNumero}{LetraNumero}{LetraNumero}
-Fecha = {CorcheteAbierto}{Space}{Entero}{Entero}{Entero}{Entero} "-" {Entero}{Entero} "-" {Entero}{Space}{CorcheteCerrado}
+Fecha = {CorcheteAbierto}{Space}{Entero}{Entero}{Entero}{Entero} "-" {Entero}{Entero} "-" {Entero}{Entero}{Space}{CorcheteCerrado}
 HexadecimalParametro = {CorcheteAbierto} {Space} {NumeroHexadecimal} {Space} {CorcheteCerrado}
 Identificador = {Letra}({Letra}|{Digito}|"-"|"_"|"$")*
 IdentificadorParametro = {CorcheteAbierto} {Space} {Identificador} {Space} {CorcheteCerrado}
@@ -92,42 +94,66 @@ Centrar = {CorcheteAbierto} {Space} "CENTRAR" {Space} {CorcheteCerrado}
 Izquierda = {CorcheteAbierto} {Space} "IZQUIERDA" {Space} {CorcheteCerrado}
 Derecha = {CorcheteAbierto} {Space} "DERECHA" {Space} {CorcheteCerrado}
 Justificar = {CorcheteAbierto} {Space} "JUSTIFICAR" {Space} {CorcheteCerrado}
+NuevoSitioWeb = {Comillas} {Space} "NUEVO_SITIO_WEB" {Space} {Comillas}
+BorrarSitioWeb = {Comillas} {Space} "BORRAR_SITIO_WEB" {Space} {Comillas}
+NuevaPagina = {Comillas} {Space} "NUEVA_PAGINA" {Space} {Comillas}
+BorrarPagina = {Comillas} {Space} "BORRAR_PAGINA" {Space} {Comillas}
+ModificarPagina = {Comillas} {Space} "MODIFICAR_PAGINA" {Space} {Comillas}
+AgregarComponente = {Comillas} {Space} "AGREGAR_COMPONENTE" {Space} {Comillas}
+BorrarComponente = {Comillas} {Space} "BORRAR_COMPONENTE" {Space} {Comillas}
+ModificarComponente = {Comillas} {Space} "MODIFICAR_COMPONENTE" {Space} {Comillas}
+IdTexto = {Comillas} {Space} "ID" {Space} {Comillas}
+TituloTexto = {Comillas} {Space} "TITULO" {Space} {Comillas}
+Sitio = {Comillas} {Space} "SITIO" {Space} {Comillas}
+Padre = {Comillas} {Space} "PADRE" {Space} {Comillas}
+UsuarioCreacion = {Comillas} {Space} "USUARIO_CREACION" {Space} {Comillas}
+FechaCreacion = {Comillas} {Space} "FECHA_CREACION" {Space} {Comillas}
+FechaModificacion = {Comillas} {Space} "FECHA_MODIFICACION" {Space} {Comillas}
+UsuarioModificacion = {Comillas} {Space} "USUARIO_MODIFICACION" {Space} {Comillas}
+Pagina = {Comillas} {Space} "PAGINA" {Space} {Comillas}
+Clase = {Comillas} {Space} "CLASE" {Space} {Comillas}
+Texto = {Comillas} {Space} "TEXTO" {Space} {Comillas}
+Alineacion = {Comillas} {Space} "ALINEACION" {Space} {Comillas}
+Color = {Comillas} {Space} "COLOR" {Space} {Comillas}
+Origen = {Comillas} {Space} "ORIGEN" {Space} {Comillas}
+Altura = {Comillas} {Space} "ALTURA" {Space} {Comillas}
+Ancho = {Comillas} {Space} "ANCHO" {Space} {Comillas}
+EtiquetasTexto = {Comillas} {Space} "ETIQUETAS" {Space} {Comillas}
+
 
 %% // separador de areas
 
 /* reglas lexicas */
 <YYINITIAL> {
 
-	"NUEVO_SITIO_WEB" {return symbol(NUEVO_SITIO_WEB, yytext());}
-	"BORRAR_SITIO_WEB" {return symbol(BORRAR_SITIO_WEB, yytext());}
-	"NUEVA_PAGINA" {return symbol(NUEVA_PAGINA, yytext());}
-	"BORRAR_PAGINA" {return symbol(BORRAR_PAGINA, yytext());}
-	"MODIFICAR_PAGINA" {return symbol(MODIFICAR_PAGINA, yytext());}
-	"AGREGAR_COMPONENTE" {return symbol(AGREGAR_COMPONENTE, yytext());}
-	"BORRAR_COMPONENTE" {return symbol(BORRAR_COMPONENTE, yytext());}
-	"MODIFICAR_COMPONENTE" {return symbol(MODIFICAR_COMPONENTE, yytext());}
-	"ID" {return symbol(ID_TEXTO, yytext());}
-	"TITULO" {return symbol(TITULO, yytext());}
-	"SITIO" {return symbol(SITIO, yytext());}
-	"PADRE" {return symbol(PADRE, yytext());}
-	"USUARIO_CREACION" {return symbol(USUARIO_CREACION, yytext());}
-	"FECHA_CREACION" {return symbol(FECHA_CREACION, yytext());}
-	"FECHA_MODIFICACION" {return symbol(FECHA_MODIFICACION, yytext());}
-	"USUARIO_MODIFICACION" {return symbol(USUARIO_MODIFICACION, yytext());}
-	"PAGINA" {return symbol(PAGINA, yytext());}
-	"CLASE" {return symbol(CLASE, yytext());}
-	"TEXTO" {return symbol(TEXTO, yytext());}
-	"ALINEACION" {return symbol(ALINEACION, yytext());}
-	"COLOR" {return symbol(COLOR, yytext());}
-	"ORIGEN" {return symbol(ORIGEN, yytext());}
-	"ALTURA" {return symbol(ALTURA, yytext());}
-	"ANCHO" {return symbol(ANCHO, yytext());}
-	"ETIQUETAS" {return symbol(ETIQUETAS, yytext());}
+	{NuevoSitioWeb} {return symbol(NUEVO_SITIO_WEB, yytext());}
+	{BorrarSitioWeb} {return symbol(BORRAR_SITIO_WEB, yytext());}
+	{NuevaPagina} {return symbol(NUEVA_PAGINA, yytext());}
+	{BorrarPagina} {return symbol(BORRAR_PAGINA, yytext());}
+	{ModificarPagina} {return symbol(MODIFICAR_PAGINA, yytext());}
+	{AgregarComponente} {return symbol(AGREGAR_COMPONENTE, yytext());}
+	{BorrarComponente} {return symbol(BORRAR_COMPONENTE, yytext());}
+	{ModificarComponente} {return symbol(MODIFICAR_COMPONENTE, yytext());}
+	{IdTexto} {return symbol(ID_TEXTO, yytext());}
+	{TituloTexto} {return symbol(TITULO, yytext());}
+	{Sitio} {return symbol(SITIO, yytext());}
+	{Padre} {return symbol(PADRE, yytext());}
+	{UsuarioCreacion} {return symbol(USUARIO_CREACION, yytext());}
+	{FechaCreacion} {return symbol(FECHA_CREACION, yytext());}
+	{FechaModificacion} {return symbol(FECHA_MODIFICACION, yytext());}
+	{UsuarioModificacion} {return symbol(USUARIO_MODIFICACION, yytext());}
+	{Pagina} {return symbol(PAGINA, yytext());}
+	{Clase} {return symbol(CLASE, yytext());}
+	{Texto} {return symbol(TEXTO, yytext());}
+	{Alineacion} {return symbol(ALINEACION, yytext());}
+	{Color} {return symbol(COLOR, yytext());}
+	{Origen} {return symbol(ORIGEN, yytext());}
+	{Altura} {return symbol(ALTURA, yytext());}
+	{Ancho} {return symbol(ANCHO, yytext());}
+	{EtiquetasTexto} {return symbol(ETIQUETAS, yytext());}
 	"<" {return symbol(SIGNO_MENOR, yytext());}
 	">" {return symbol(SIGNO_MAYOR, yytext());}
 	"=" {return symbol(SIGNO_IGUAL, yytext());}
-	"\"" {return symbol(COMILLAS, yytext());}
-	"|" {return symbol(OR, yytext());}
 	{Centrar} {return symbol(CENTRAR_PARAMETRO, yytext());}
 	{Izquierda} {return symbol(IZQUIERDA_PARAMETRO, yytext());}
 	{Derecha} {return symbol(DERECHA_PARAMETRO, yytext());}
@@ -149,7 +175,6 @@ Justificar = {CorcheteAbierto} {Space} "JUSTIFICAR" {Space} {CorcheteCerrado}
 	{AtributoCerrado} {return symbol(ATRIBUTO_CERRADO, yytext());}
 	{Atributos} {return symbol(ATRIBUTOS_ABIERTO, yytext());}
 	{AtributosCerrado} {return symbol(ATRIBUTOS_CERRADO, yytext());}
-	"/"	{return symbol(SLASH, yytext());}
 	{Valor} {return symbol(VALOR, yytext());}
 	{Fecha} {return symbol(FECHA_PARAMETRO, yytext());}
 	{HexadecimalParametro} {return symbol(HEXADECIMAL_PARAMETRO, yytext());}
@@ -159,8 +184,10 @@ Justificar = {CorcheteAbierto} {Space} "JUSTIFICAR" {Space} {CorcheteCerrado}
 	{Video} {return symbol(VIDEO_PARAMETRO, yytext());}
 	{Menu} {return symbol(MENU_PARAMETRO, yytext());}
 	{IdentificadorParametro} {return symbol(IDENTIFICADOR, yytext());}
+	{TextoString} {return symbol(TEXTO_STRING, yytext());}
 	{EnteroParametro} {return symbol(ENTERO_PARAMETRO, yytext());}
 	{TextoParametro} {return symbol(TEXTO_PARAMETRO, yytext());}
+	{Slash}	{return symbol(SLASH, yytext());}
 	{WhiteSpace} 		{/*Nothing to do*/}
 	{LineTerminator} 	{/*Nothing to do*/}
 
