@@ -1,5 +1,6 @@
 package parrot;
 
+import parrot.backend.manejadores.ManejadorLectorXML;
 import parrot.frontend.entrada.LectorXML;
 
 /**

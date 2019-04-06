@@ -3,10 +3,13 @@ package parrot.backend.analizadores;
 import java_cup.runtime.*;
 import parrot.backend.analizadores.sym;
 import parrot.backend.manejadores.*;
+import parrot.backend.objetos.SitioWeb;
 
 parser code {:
 
 	private ManejadorParser mp = null;
+	private SitioWeb sw = null;
+	private int internalOption = 0;
 
 
 	// Connect this parser to a scanner!
@@ -74,10 +77,10 @@ main3 ::= 	crearSitio
 
 /* -----GRAMATICA CREAR SITIO WEB------ */
 
-crearSitio ::= 	accion1 SIGNO_MENOR PARAMETROS_ABIERTO SIGNO_MAYOR parametro1 SIGNO_MENOR PARAMETROS_CERRADO SIGNO_MAYOR SIGNO_MENOR ACCION_CERRADO SIGNO_MAYOR
+crearSitio ::= 	accion1 SIGNO_MENOR PARAMETROS_ABIERTO SIGNO_MAYOR parametro1 SIGNO_MENOR PARAMETROS_CERRADO SIGNO_MAYOR SIGNO_MENOR ACCION_CERRADO SIGNO_MAYOR {:sw = mp.setSitioWeb(null, 7, sw);:}
 				;
 
-accion1 ::=		SIGNO_MENOR ACCION_ABIERTO NOMBRE SIGNO_IGUAL NUEVO_SITIO_WEB SIGNO_MAYOR
+accion1 ::=		SIGNO_MENOR ACCION_ABIERTO NOMBRE SIGNO_IGUAL NUEVO_SITIO_WEB SIGNO_MAYOR {:sw = mp.setSitioWeb(null, 1, null);:}
 				;
 
 parametro1 ::=	parametro1 param1 SIGNO_MENOR PARAMETRO_CERRADO SIGNO_MAYOR
@@ -87,17 +90,17 @@ parametro1 ::=	parametro1 param1 SIGNO_MENOR PARAMETRO_CERRADO SIGNO_MAYOR
 param1 ::=		SIGNO_MENOR PARAMETRO_ABIERTO NOMBRE SIGNO_IGUAL opcion1
 				;
 
-opcion1 ::=		op1 SIGNO_MAYOR FECHA_PARAMETRO
-				| op2 SIGNO_MAYOR IDENTIFICADOR
+opcion1 ::=		op1 SIGNO_MAYOR FECHA_PARAMETRO:e1 {:RESULT = e1; sw = mp.setSitioWeb(RESULT, internalOption, sw);:}
+				| op2 SIGNO_MAYOR IDENTIFICADOR:e2 {:RESULT = e2; sw = mp.setSitioWeb(RESULT, internalOption, sw);:}
 				;
 
-op1 ::=			FECHA_CREACION
-				| FECHA_MODIFICACION
+op1 ::=			FECHA_CREACION {:internalOption = 2;:}
+				| FECHA_MODIFICACION {:internalOption = 3;:}
 				;
 
-op2 ::=			ID_TEXTO
-				| USUARIO_CREACION
-				| USUARIO_MODIFICACION
+op2 ::=			ID_TEXTO {:internalOption = 4;:}
+				| USUARIO_CREACION {:internalOption = 5;:}
+				| USUARIO_MODIFICACION {:internalOption = 6;:}
 				;
 
 /* -----GRAMATICA BORRAR SITIO & PAGINA------ */

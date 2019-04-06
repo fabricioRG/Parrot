@@ -8,6 +8,7 @@ package parrot.backend.analizadores;
 import java_cup.runtime.*;
 import parrot.backend.analizadores.sym;
 import parrot.backend.manejadores.*;
+import parrot.backend.objetos.SitioWeb;
 import java_cup.runtime.XMLElement;
 
 /** CUP v0.11b 20160615 (GIT 4ac7450) generated parser.
@@ -616,6 +617,8 @@ public class parser extends java_cup.runtime.lr_parser {
 
 
 	private ManejadorParser mp = null;
+	private SitioWeb sw = null;
+	private int internalOption = 0;
 
 
 	// Connect this parser to a scanner!
@@ -763,7 +766,7 @@ class CUP$parser$actions {
           case 11: // crearSitio ::= accion1 SIGNO_MENOR PARAMETROS_ABIERTO SIGNO_MAYOR parametro1 SIGNO_MENOR PARAMETROS_CERRADO SIGNO_MAYOR SIGNO_MENOR ACCION_CERRADO SIGNO_MAYOR 
             {
               String RESULT =null;
-
+		sw = mp.setSitioWeb(null, 7, sw);
               CUP$parser$result = parser.getSymbolFactory().newSymbol("crearSitio",5, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-10)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -772,7 +775,7 @@ class CUP$parser$actions {
           case 12: // accion1 ::= SIGNO_MENOR ACCION_ABIERTO NOMBRE SIGNO_IGUAL NUEVO_SITIO_WEB SIGNO_MAYOR 
             {
               String RESULT =null;
-
+		sw = mp.setSitioWeb(null, 1, null);
               CUP$parser$result = parser.getSymbolFactory().newSymbol("accion1",11, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-5)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -808,7 +811,10 @@ class CUP$parser$actions {
           case 16: // opcion1 ::= op1 SIGNO_MAYOR FECHA_PARAMETRO 
             {
               String RESULT =null;
-
+		int e1left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int e1right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String e1 = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		RESULT = e1; sw = mp.setSitioWeb(RESULT, internalOption, sw);
               CUP$parser$result = parser.getSymbolFactory().newSymbol("opcion1",14, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -817,7 +823,10 @@ class CUP$parser$actions {
           case 17: // opcion1 ::= op2 SIGNO_MAYOR IDENTIFICADOR 
             {
               String RESULT =null;
-
+		int e2left = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).left;
+		int e2right = ((java_cup.runtime.Symbol)CUP$parser$stack.peek()).right;
+		String e2 = (String)((java_cup.runtime.Symbol) CUP$parser$stack.peek()).value;
+		RESULT = e2; sw = mp.setSitioWeb(RESULT, internalOption, sw);
               CUP$parser$result = parser.getSymbolFactory().newSymbol("opcion1",14, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-2)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -826,7 +835,7 @@ class CUP$parser$actions {
           case 18: // op1 ::= FECHA_CREACION 
             {
               String RESULT =null;
-
+		internalOption = 2;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("op1",15, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -835,7 +844,7 @@ class CUP$parser$actions {
           case 19: // op1 ::= FECHA_MODIFICACION 
             {
               String RESULT =null;
-
+		internalOption = 3;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("op1",15, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -844,7 +853,7 @@ class CUP$parser$actions {
           case 20: // op2 ::= ID_TEXTO 
             {
               String RESULT =null;
-
+		internalOption = 4;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("op2",16, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -853,7 +862,7 @@ class CUP$parser$actions {
           case 21: // op2 ::= USUARIO_CREACION 
             {
               String RESULT =null;
-
+		internalOption = 5;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("op2",16, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -862,7 +871,7 @@ class CUP$parser$actions {
           case 22: // op2 ::= USUARIO_MODIFICACION 
             {
               String RESULT =null;
-
+		internalOption = 6;
               CUP$parser$result = parser.getSymbolFactory().newSymbol("op2",16, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

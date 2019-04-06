@@ -14,11 +14,10 @@ public class LectorXML extends javax.swing.JFrame {
      * Creates new form LectorXML
      */
     
-    private ManejadorLectorXML ml = null;
-    
     public LectorXML() {
-        this.ml = new ManejadorLectorXML(this);
+        ManejadorLectorXML.getInstance().setLectorXML(this);
         initComponents();
+        this.setTitle("Parrot");
         this.setLocationRelativeTo(this);
         this.erroresPane.setVisible(false);
     }
@@ -143,7 +142,7 @@ public class LectorXML extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void procesarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_procesarButtonActionPerformed
-        this.ml.procesarTexto(this.xmlText.getText().trim());
+        ManejadorLectorXML.getInstance().procesarTexto(this.xmlText.getText().trim());
         
     }//GEN-LAST:event_procesarButtonActionPerformed
 

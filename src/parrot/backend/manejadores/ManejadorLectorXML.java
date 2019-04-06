@@ -12,18 +12,33 @@ import parrot.frontend.entrada.LectorXML;
 public class ManejadorLectorXML {
 
     private LectorXML lector = null;
-    private ManejadorParser mp = null;
+    private static ManejadorLectorXML INSTANCE = null;
 
-    public ManejadorLectorXML(LectorXML lector) {
+    private  ManejadorLectorXML() {
+    }
+    
+    private synchronized static void createInstance(){
+        if(INSTANCE == null){
+            INSTANCE = new ManejadorLectorXML();
+        }
+    }
+    
+    public static ManejadorLectorXML getInstance(){
+        if(INSTANCE == null){
+            createInstance();
+        }
+        return INSTANCE;
+    }
+    
+    public void setLectorXML(LectorXML lector){
         this.lector = lector;
-        this.mp = new ManejadorParser(this);
     }
     
     public void procesarTexto(String entrada) {
         this.lector.getErroresPane().setVisible(false);
         StringReader sr = new StringReader(entrada);
         Lexer1 lexer = new Lexer1(sr);
-        parser pars = new parser(lexer, this.mp);
+        parser pars = new parser(lexer, ManejadorParser.getInstance());
 
         try {
             if (entrada.isEmpty()) {
@@ -31,6 +46,7 @@ public class ManejadorLectorXML {
             }
             pars.parse();
         } catch (Exception ex) {
+            ex.printStackTrace();
             showErrorMessege(ex.getMessage());
         }
     }
