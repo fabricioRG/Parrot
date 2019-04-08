@@ -39,7 +39,6 @@ public class ManejadorLectorXML {
         StringReader sr = new StringReader(entrada);
         Lexer1 lexer = new Lexer1(sr);
         parser pars = new parser(lexer, ManejadorParser.getInstance());
-
         try {
             if (entrada.isEmpty()) {
                 throw new Exception("Entrada vacia, intente de nuevo");

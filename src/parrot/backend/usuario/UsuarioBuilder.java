@@ -13,6 +13,7 @@ public class UsuarioBuilder {
     
     String id;
     String nombre;
+    String usuario;
     String pass;
 
     public UsuarioBuilder() {
@@ -32,6 +33,11 @@ public class UsuarioBuilder {
         this.pass = pass;
         return this;
     }
+
+    public UsuarioBuilder usuario(String usuario) {
+        this.usuario = usuario;
+        return this;
+    }
     
     public Usuario build(){
         return new Usuario(this);
@@ -43,6 +49,10 @@ public class UsuarioBuilder {
 
     public String getNombre() {
         return nombre;
+    }
+
+    public String getUsuario() {
+        return usuario;
     }
 
     public String getPass() {

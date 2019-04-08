@@ -8,11 +8,12 @@ import java.util.Date;
  */
 public class SitioWeb {
 
-    String id;
-    String usuarioCreacion;
-    Date fechaCreacion;
-    Date fechaModificacion;
-    String usuarioModificacion;
+    private String id;
+    private String usuarioCreacion;
+    private Date fechaCreacion;
+    private Date fechaModificacion;
+    private String usuarioModificacion;
+    private String path;
     
     SitioWeb(SitioWebBuilder builder){
         this.id = builder.getId();
@@ -20,6 +21,7 @@ public class SitioWeb {
         this.fechaCreacion = builder.getFechaCreacion();
         this.fechaModificacion = builder.getFechaModificacion();
         this.usuarioModificacion = builder.getUsuarioModificacion();
+        this.path = builder.getPath();
     }
 
     public String getId() {
@@ -60,6 +62,14 @@ public class SitioWeb {
 
     public void setUsuarioModificacion(String usuarioModificacion) {
         this.usuarioModificacion = usuarioModificacion;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
     
 }

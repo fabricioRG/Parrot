@@ -8,8 +8,8 @@ public class ImagenBuilder {
     
     String origen;
     String alineacion;
-    int altura;
-    int ancho;
+    int altura = 0;
+    int ancho = 0;
 
     public ImagenBuilder() {
     }

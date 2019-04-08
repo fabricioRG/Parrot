@@ -1,9 +1,18 @@
 package parrot.backend.manejadores;
 
 import java.io.File;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import parrot.backend.clase.ManejadorClase;
+import parrot.backend.componente.ManejadorComponente;
+import parrot.backend.error.ManejadorErrores;
+import parrot.backend.paginaweb.ManejadorPaginaWeb;
+import parrot.backend.paginaweb.PaginaWeb;
+import parrot.backend.parrafo.ManejadorParrafo;
+import parrot.backend.sitioweb.ManejadorSitioWeb;
 import parrot.backend.sitioweb.SitioWeb;
 import parrot.backend.sitioweb.SitioWebBuilder;
+import parrot.backend.titulo.ManejadorTitulo;
 
 /**
  *
@@ -11,86 +20,83 @@ import parrot.backend.sitioweb.SitioWebBuilder;
  */
 public class ManejadorParser {
 
-    public static final String ABSOLUTH_PATH_SERVER = "/var/www/html"; 
-    private SimpleDateFormat fechaFormat = null;
+    public static final String ABSOLUTH_PATH_SERVER = "/var/www/html";
     private static ManejadorParser INSTANCE = null;
-    
+
     private ManejadorParser() {
-        fechaFormat = new SimpleDateFormat("yyyy-MM-dd");
     }
-    
-    private synchronized static void createInstance(){
-        if (INSTANCE == null){
+
+    private synchronized static void createInstance() {
+        if (INSTANCE == null) {
             INSTANCE = new ManejadorParser();
         }
     }
-    
-    public static ManejadorParser getInstance(){
-        if(INSTANCE == null){
+
+    public static ManejadorParser getInstance() {
+        if (INSTANCE == null) {
             createInstance();
         }
         return INSTANCE;
     }
-    
-    public void showErrorMessege(String error){
+
+    public void showErrorMessege(String error) {
         ManejadorLectorXML.getInstance().showErrorMessege(error);
         System.out.println(error);
     }
-    
-    /*
-    Metodo que recibe parametros de tipo string y opciones tipo int, los cuales
-    al reconocerse su tipo realizan una accion especifica los cuales son:
-    OPTION                      ACCION
-         1       -         Crear objeto Sitio Web
-         2       -         Asignar Fecha de Creacion
-         3       -         Asignar Fecha de Modificacion
-         4       -         Asignar Id
-         5       -         Asignar Usuario Creacion
-         6       -        Asignar Usuario Modificacion
-    */
-    public SitioWeb setSitioWeb(String parametro, int option, SitioWeb sitioWeb) throws Exception{
-        SitioWeb sw = sitioWeb;
-        String paramet = "";
-        if(parametro != null && !parametro.isEmpty()){
-            paramet = parametro.substring(1, parametro.indexOf("]"));
+
+    public void setSitioWeb(String parametro, int option) {
+        try {
+            ManejadorSitioWeb.getInstance().setSitioWeb(parametro, option);
+        } catch (ParseException pe) {
+            ManejadorErrores.getInstance().errorByDate(parametro);
+        } catch (Exception e) {
+            ManejadorErrores.getInstance().errorByEmpty(e.getMessage());
         }
-        switch(option){
-            case 1:
-                sw = new SitioWebBuilder().build();
-                break;
-            case 2:
-                sw.setFechaCreacion(fechaFormat.parse(paramet));
-                break;
-            case 3:
-                sw.setFechaModificacion(fechaFormat.parse(paramet));
-                break;
-            case 4:
-                sw.setId(paramet);
-                break;
-            case 5:
-                sw.setUsuarioCreacion(paramet);
-                break;
-            case 6:
-                sw.setUsuarioModificacion(paramet);
-                break;
-            case 7:
-                if(sw.getId() == null){
-                    throw new Exception("No se ha podido crear el sitio web, no se ha especificado ID");
-                }
-                createDirectory("/" + sw.getId());
-                
-                System.out.println(sw.getId());
-                System.out.println(sw.getFechaCreacion());
-                System.out.println(sw.getFechaModificacion());
-                System.out.println(sw.getUsuarioCreacion());
-                System.out.println(sw.getUsuarioModificacion());
-                break;
+    }
+
+    public void setPaginaWeb(String parametro, int option) {
+        try {
+            ManejadorPaginaWeb.getInstance().setPaginaWeb(parametro, option);
+        } catch (ParseException pe) {
+            ManejadorErrores.getInstance().errorByDate(parametro);
+        } catch (Exception e) {
+            ManejadorErrores.getInstance().errorByEmpty(e.getMessage());
         }
-        return sw;
+    }
+
+    public void setComponente(String parametro, int option) {
+        try {
+            ManejadorComponente.getInstance().setComponente(parametro, option);
+        } catch (Exception e) {
+            ManejadorErrores.getInstance().errorByEmpty(e.getMessage());
+        }
+    }
+
+    public void setClase(int option) {
+        try {
+            ManejadorClase.getInstance().setClase(option);
+        } catch (Exception e) {
+            ManejadorErrores.getInstance().errorByEmpty(e.getMessage());
+        }
+    }
+
+    public void setTitulo(String parametro, int option) {
+        ManejadorTitulo.getInstance().setTitulo(parametro, option);
+    }
+
+    public void setParrafo(String parametro, int option){
+        ManejadorParrafo.getInstance().setParrafo(parametro, option);
     }
     
-    private void createDirectory(String path){
-        new File(ABSOLUTH_PATH_SERVER + path).mkdir();
+    public boolean isId(String id) {
+        if (ManejadorSitioWeb.getInstance().getSitioWebById(id) != null) {
+            return true;
+        } else if (ManejadorPaginaWeb.getInstance().getPaginaWebById(id) != null) {
+            return true;
+        } else if (ManejadorComponente.getInstance().getComponenteById(id) != null) {
+            return true;
+        }
+        return false;
     }
-    
+
 }

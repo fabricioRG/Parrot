@@ -10,15 +10,16 @@ import parrot.backend.etiqueta.Etiqueta;
  */
 public class PaginaWeb {
 
-    String id;
-    String titulo;
-    SitioWeb sitio;
-    PaginaWeb padre;
-    String usuarioCreacion;
-    Date fechaCreacion;
-    Date fechaModificacion;
-    String usuarioModificacion;
-    Etiqueta etiquetaCabeza;
+    private String id;
+    private String titulo;
+    private SitioWeb sitio;
+    private PaginaWeb padre;
+    private String usuarioCreacion;
+    private Date fechaCreacion;
+    private Date fechaModificacion;
+    private String usuarioModificacion;
+    private Etiqueta etiquetaCabeza;
+    private String path;
     
     PaginaWeb (PaginaWebBuilder builder){
         this.id = builder.getId();
@@ -30,6 +31,7 @@ public class PaginaWeb {
         this.fechaCreacion = builder.getFechaCreacion();
         this.fechaModificacion = builder.getFechaModificacion();
         this.usuarioModificacion = builder.getUsuarioModificacion();
+        this.path = builder.getPath();
     }
 
     public String getTitulo() {
@@ -102,6 +104,14 @@ public class PaginaWeb {
 
     public void setUsuarioModificacion(String usuarioModificacion) {
         this.usuarioModificacion = usuarioModificacion;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
     
 }

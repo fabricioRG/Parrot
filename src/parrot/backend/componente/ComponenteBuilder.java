@@ -9,9 +9,10 @@ import parrot.backend.paginaweb.PaginaWeb;
  */
 public class ComponenteBuilder {
 
-    String id;
-    PaginaWeb pagina;
-    Clase clase;
+    private String id;
+    private PaginaWeb pagina;
+    private Clase clase;
+    private int posicion;
 
     public ComponenteBuilder() {
     }
@@ -30,6 +31,11 @@ public class ComponenteBuilder {
         this.clase = clase;
         return this;
     }
+
+    public ComponenteBuilder posicion(int posicion) {
+        this.posicion = posicion;
+        return this;
+    }
     
     public Componente build(){
         return new Componente(this);
@@ -45,6 +51,10 @@ public class ComponenteBuilder {
 
     public Clase getClase() {
         return clase;
+    }
+
+    public int getPosicion() {
+        return posicion;
     }
     
 }

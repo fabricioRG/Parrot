@@ -3,7 +3,7 @@
 package parrot.backend.analizadores;
 
 import java_cup.runtime.*;
-import static parrot.backend.analizadores.sym.*;
+import static parrot.backend.analizadores.sym1.*;
 
 
 /**
@@ -1252,7 +1252,7 @@ public class Lexer1 implements java_cup.runtime.Scanner {
    */
   private String getTokenName(int token) {
     try {
-      java.lang.reflect.Field [] classFields = sym.class.getFields();
+      java.lang.reflect.Field [] classFields = sym1.class.getFields();
       for (int i = 0; i < classFields.length; i++) {
         if (classFields[i].getInt(null) == token) {
           return classFields[i].getName();

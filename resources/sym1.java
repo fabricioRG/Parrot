@@ -6,7 +6,7 @@
 package parrot.backend.analizadores;
 
 /** CUP generated class containing symbol constants. */
-public class sym {
+public class sym1 {
   /* terminals */
   public static final int ETIQUETAS_CERRADO = 52;
   public static final int ETIQUETA_ABIERTO = 49;

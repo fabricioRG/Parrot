@@ -9,11 +9,12 @@ import java.util.Date;
  */
 public class SitioWebBuilder {
 
-    String id;
-    String usuarioCreacion;
-    Date fechaCreacion;
-    Date fechaModificacion;
-    String usuarioModificacion;
+    private String id;
+    private String usuarioCreacion;
+    private Date fechaCreacion;
+    private Date fechaModificacion;
+    private String usuarioModificacion;
+    private String path;
 
     public SitioWebBuilder() {
     }
@@ -42,6 +43,11 @@ public class SitioWebBuilder {
         this.usuarioModificacion = usuarioModificacion;
         return this;
     }
+
+    public SitioWebBuilder path(String path) {
+        this.path = path;
+        return this;
+    }
     
     public SitioWeb build(){
         return new SitioWeb(this);
@@ -65,6 +71,10 @@ public class SitioWebBuilder {
 
     public String getUsuarioModificacion() {
         return usuarioModificacion;
+    }
+
+    public String getPath() {
+        return path;
     }
     
 }

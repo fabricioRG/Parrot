@@ -25,4 +25,14 @@ private static ManejadorEtiqueta INSTANCE = null;
         return INSTANCE;
     }
     
+    public void addEtiquetaToNext(Etiqueta etiqueta, Etiqueta cabeza){
+        Etiqueta i = cabeza;
+        Etiqueta j = null;
+        while (i != null) {            
+            j = i;
+            i = i.getSiguienteEtiqueta();
+        }
+        j.setSiguienteEtiqueta(etiqueta);
+    }
+    
 }

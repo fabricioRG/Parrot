@@ -9,14 +9,16 @@ import parrot.backend.paginaweb.PaginaWeb;
  */
 public class Componente {
 
-    String id;
-    PaginaWeb pagina;
-    Clase clase;
+    private String id;
+    private PaginaWeb pagina;
+    private Clase clase;
+    private int posicion;
     
     Componente (ComponenteBuilder builder){
         this.id = builder.getId();
         this.pagina = builder.getPagina();
         this.clase = builder.getClase();
+        this.posicion = builder.getPosicion();
     }
 
     public String getId() {
@@ -37,6 +39,14 @@ public class Componente {
 
     public Clase getClase() {
         return clase;
+    }
+
+    public int getPosicion() {
+        return posicion;
+    }
+
+    public void setPosicion(int posicion) {
+        this.posicion = posicion;
     }
 
     public void setClase(Clase clase) {

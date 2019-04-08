@@ -1,0 +1,189 @@
+ package parrot.backend.analizadores;
+
+import java_cup.runtime.*;
+import parrot.backend.analizadores.sym2;
+import parrot.backend.xml.ImportadorXML;
+import parrot.backend.sitioweb.*;
+import parrot.backend.paginaweb.*;
+
+
+parser code {:
+
+	private ImportadorXML ixml = null;
+	private SitioWeb sw = null;
+	private PaginaWeb pw = null;
+	private int internalOption = 0;
+
+	// Connect this parser to a scanner!
+	public parser2(Lexer2 lex, ImportadorXML ixml) {
+		super(lex);
+		this.ixml = ixml;
+	}
+
+        public void syntax_error(Symbol s) {
+            System.out.println("Error R de sintaxis: "+ s.value +" Linea "+(s.left+1)+" columna "+(s.right+1) );
+        }
+
+:}
+
+/* Terminals (tokens returned by the scanner). */
+terminal String         SITIO_WEB_ABIERTO, SITIO_WEB_CERRADO, ID_ABIERTO, ID_CERRADO, USUARIO_CREACION_ABIERTO;
+terminal String 		USUARIO_CREACION_CERRADO, USUARIO_MODIFICACION_ABIERTO, USUARIO_MODIFICACION_CERRADO;
+terminal String 		FECHA_CREACION_ABIERTO, FECHA_CREACION_CERRADO, FECHA_MODIFICACION_ABIERTO, FECHA_MODIFICACION_CERRADO;
+terminal String 		PAGINA_WEB_ABIERTO, PAGINA_WEB_CERRADO, TITULO_ABIERTO, TITULO_CERRADO, SITIO_ABIERTO, SITIO_CERRADO;
+terminal String 		PADRE_ABIERTO, PADRE_CERRADO, COMPONENTE_ABIERTO, COMPONENTE_CERRADO, PAGINA_ABIERTA, PAGINA_CERRADO;
+terminal String 		TEXTO_ABIERTO, TEXTO_CERRADO, ALINEACION_ABIERTO, ALINEACION_CERRADO, COLOR_ABIERTO, COLOR_CERRADO;
+terminal String 		PARRAFO_ABIERTO, PARRAFO_CERRADO, IMAGEN_ABIERTO, IMAGEN_CERRADO, ORIGEN_ABIERTO, ORIGEN_CERRADO;
+terminal String 		ALTURA_ABIERTO, ALTURA_CERRADO, ANCHO_ABIERTO, ANCHO_CERRADO, VIDEO_ABIERTO, VIDEO_CERRADO;
+terminal String 		MENU_ABIERTO, MENU_CERRADO, ETIQUETA_ABIERTO, ETIQUETA_CERRADO, PATH_ABIERTO, PATH_CERRADO;
+terminal String 		CENTRAR_PARAMETRO, IZQUIERDA_PARAMETRO, DERECHA_PARAMETRO, JUSTIFICAR_PARAMETRO, IDENTIFICADOR;
+terminal String 		ENTERO_PARAMETRO, TEXTO_PARAMETRO, SLASH, HEXADECIMAL_PARAMETRO, FECHA_PARAMETRO;
+terminal String 		PAGINAS_ABIERTO, PAGINAS_CERRADO, COMPONENTES_ABIERTO, COMPONENTES_CERRADO, ETIQUETAS_ABIERTO, ETIQUETAS_CERRADO;
+
+non terminal String 		main;
+non terminal String 		titulo, parrafo, imagen, video, menu, etiquetas, etiquet, id3;
+non terminal String 		sitioWeb, parametros1, id, usuarioCreacion, fechaCreacion, fechaModificacion, usuarioModificacion, path;
+non terminal String 		paginas, pagina, parametros2, id2, usuarioCreacion2, fechaCreacion2, fechaModificacion2, usuarioModificacion2;
+non terminal String  		componentes, componente, texto, color, origen, alineacion, alineacion1, altura, ancho, padre, etiqueta, etique;
+
+start with main;
+
+/* INICIO GRAMATICA DE -----MAIN----- */
+
+main ::= 	sitioWeb
+			;
+
+/*INICIO GRAMTICA SITIO WEB*/
+
+sitioWeb ::= 			SITIO_WEB_ABIERTO parametros1 PAGINAS_ABIERTO paginas PAGINAS_CERRADO SITIO_WEB_CERRADO
+						| SITIO_WEB_ABIERTO parametros1 PAGINAS_ABIERTO PAGINAS_CERRADO SITIO_WEB_CERRADO
+						;
+
+parametros1 ::=			id usuarioCreacion fechaCreacion fechaModificacion usuarioModificacion path
+						;
+
+id ::= 					ID_ABIERTO IDENTIFICADOR:e1 ID_CERRADO {:RESULT = e1;ixml.setSitioWeb(RESULT, 1);:}
+						;
+
+usuarioCreacion ::=		USUARIO_CREACION_ABIERTO IDENTIFICADOR:e2 USUARIO_CREACION_CERRADO {:RESULT = e2;ixml.setSitioWeb(RESULT, 2);:}
+						;
+
+fechaCreacion ::= 		FECHA_CREACION_ABIERTO FECHA_PARAMETRO:e3 FECHA_CREACION_CERRADO {:RESULT = e3; ixml.setSitioWeb(RESULT, 3);:}
+						;
+
+fechaModificacion ::=	FECHA_MODIFICACION_ABIERTO FECHA_PARAMETRO:e4 FECHA_MODIFICACION_CERRADO {:RESULT = e4; ixml.setSitioWeb(RESULT, 4);:}
+						;
+
+usuarioModificacion ::= USUARIO_MODIFICACION_ABIERTO IDENTIFICADOR:e5 USUARIO_MODIFICACION_CERRADO {:RESULT = e5; ixml.setSitioWeb(RESULT, 5);:}
+						;
+
+path ::= 				PATH_ABIERTO TEXTO_PARAMETRO:e6 PATH_CERRADO {:RESULT = e6; ixml.setSitioWeb(RESULT, 6);:}
+						;
+
+
+paginas ::=				paginas pagina
+						| pagina
+						;
+
+pagina ::= 				PAGINA_WEB_ABIERTO parametros2 COMPONENTES_ABIERTO componentes COMPONENTES_CERRADO ETIQUETAS_ABIERTO etiquetas ETIQUETAS_CERRADO PAGINA_WEB_CERRADO
+						| PAGINA_WEB_ABIERTO parametros2 COMPONENTES_ABIERTO COMPONENTES_CERRADO ETIQUETAS_ABIERTO etiquetas ETIQUETAS_CERRADO PAGINA_WEB_CERRADO
+						| PAGINA_WEB_ABIERTO parametros2 COMPONENTES_ABIERTO componentes COMPONENTES_CERRADO ETIQUETAS_ABIERTO ETIQUETAS_CERRADO PAGINA_WEB_CERRADO
+						| PAGINA_WEB_ABIERTO parametros2 COMPONENTES_ABIERTO COMPONENTES_CERRADO ETIQUETAS_ABIERTO ETIQUETAS_CERRADO PAGINA_WEB_CERRADO
+						;
+
+parametros2 ::= 		id2 usuarioCreacion2 fechaCreacion2 fechaModificacion2 usuarioModificacion2
+						;
+
+id2 ::= 				ID_ABIERTO IDENTIFICADOR:e1 ID_CERRADO {:RESULT = e1;:}
+						;
+
+usuarioCreacion2 ::=	USUARIO_CREACION_ABIERTO IDENTIFICADOR:e2 USUARIO_CREACION_CERRADO {:RESULT = e2;:}
+						;
+
+fechaCreacion2 ::= 		FECHA_CREACION_ABIERTO FECHA_PARAMETRO:e3 FECHA_CREACION_CERRADO {:RESULT = e3;:}
+						;
+
+fechaModificacion2 ::=	FECHA_MODIFICACION_ABIERTO FECHA_PARAMETRO:e4 FECHA_MODIFICACION_CERRADO {:RESULT = e4;:}
+						;
+
+usuarioModificacion2 ::= USUARIO_MODIFICACION_ABIERTO IDENTIFICADOR:e5 USUARIO_MODIFICACION_CERRADO {:RESULT = e5;:}
+						;
+
+componentes ::=			componentes componente
+						| componente
+						;
+
+componente ::=			COMPONENTE_ABIERTO id3 titulo COMPONENTE_CERRADO
+						| COMPONENTE_ABIERTO id3 parrafo COMPONENTE_CERRADO
+						| COMPONENTE_ABIERTO id3 imagen COMPONENTE_CERRADO
+						| COMPONENTE_ABIERTO id3 video COMPONENTE_CERRADO
+						| COMPONENTE_ABIERTO id3 menu COMPONENTE_CERRADO
+						;
+
+id3 ::= 				ID_ABIERTO IDENTIFICADOR ID_CERRADO
+						;
+
+titulo ::= 				TITULO_ABIERTO texto alineacion color TITULO_CERRADO
+						| TITULO_ABIERTO texto color TITULO_CERRADO
+						| TITULO_ABIERTO texto alineacion TITULO_CERRADO
+						| TITULO_ABIERTO texto TITULO_CERRADO
+						;
+
+texto ::= 				TEXTO_ABIERTO TEXTO_PARAMETRO TEXTO_CERRADO
+						;
+
+color ::= 				COLOR_ABIERTO HEXADECIMAL_PARAMETRO COLOR_CERRADO
+						;
+
+parrafo ::= 			PARRAFO_ABIERTO texto alineacion color PARRAFO_CERRADO
+						| PARRAFO_ABIERTO texto color PARRAFO_CERRADO
+						| PARRAFO_ABIERTO texto alineacion PARRAFO_CERRADO
+						| PARRAFO_ABIERTO texto PARRAFO_CERRADO
+						;
+
+imagen ::= 				IMAGEN_ABIERTO origen alineacion altura ancho IMAGEN_CERRADO
+						| IMAGEN_ABIERTO origen altura ancho IMAGEN_CERRADO
+						;
+
+origen ::= 				ORIGEN_ABIERTO TEXTO_PARAMETRO ORIGEN_CERRADO
+						;
+
+alineacion ::=			ALINEACION_ABIERTO alineacion1 ALINEACION_CERRADO
+						;
+
+alineacion1 ::= 		CENTRAR_PARAMETRO
+						| JUSTIFICAR_PARAMETRO
+						| DERECHA_PARAMETRO
+						| IZQUIERDA_PARAMETRO
+						;
+
+altura ::=				ALTURA_ABIERTO ENTERO_PARAMETRO ALTURA_CERRADO
+						;
+
+ancho ::= 				ANCHO_ABIERTO ENTERO_PARAMETRO ANCHO_CERRADO
+						;
+
+video ::= 				VIDEO_ABIERTO origen altura ancho VIDEO_CERRADO
+						;
+
+menu ::= 				MENU_ABIERTO padre etiqueta MENU_CERRADO
+						;
+
+padre ::= 				PADRE_ABIERTO IDENTIFICADOR PADRE_CERRADO
+						;
+
+etiqueta ::= 			etiqueta etique
+						| etique
+						;
+
+etique ::= 				ETIQUETA_ABIERTO TEXTO_PARAMETRO ETIQUETA_CERRADO
+						;
+
+etiquetas ::= 			etiquetas etiquet
+						| etiquet
+						;
+
+etiquet ::= 			ETIQUETA_ABIERTO TEXTO_PARAMETRO ETIQUETA_CERRADO
+						;
+
+
