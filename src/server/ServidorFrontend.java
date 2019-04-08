@@ -114,6 +114,7 @@ public class ServidorFrontend extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        jTextPane.setText("algo");
         Connector.getInstance().initServer(this);
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -131,6 +132,6 @@ public class ServidorFrontend extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTextPane jTextPane;
+    private javax.swing.JTextPane jTextPane;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,4 +1,6 @@
-package parrot.backend.usuario;
+package server.backend.usuario;
+
+import server.backend.usuario.UsuarioBuilder;
 
 /**
  *
@@ -8,13 +10,11 @@ public class Usuario {
 
     String id;
     String nombre;
-    String usuario;
     String pass;
     
     Usuario(UsuarioBuilder builder){
         this.id = builder.getId();
         this.nombre = builder.getNombre();
-        this.usuario = builder.getUsuario();
         this.pass = builder.getPass();
     }
 
@@ -32,14 +32,6 @@ public class Usuario {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public String getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(String usuario) {
-        this.usuario = usuario;
     }
 
     public String getPass() {

@@ -15,7 +15,7 @@ public class Connector {
 
     private static Connector INSTANCE = null;
 
-    final int PUERTO = 5000;
+    final int PUERTO = 8000;
     ServerSocket sc;
     Socket so;
     DataOutputStream salida;
@@ -40,10 +40,11 @@ public class Connector {
 //SERVIDOR
     public void initServer(ServidorFrontend sf) {
         BufferedReader entrada;
+        sf.getjTextPane().setText("Esperando una conexion.");
         try {
             sc = new ServerSocket(PUERTO);/* crea socket servidor que escuchara en puerto 5000*/
             so = new Socket();
-            sf.getjTextPane().setText("Esperando una conexión:");
+            System.out.println("Esperando una conexion:");
             so = sc.accept();
 
             //Inicia el socket, ahora esta esperando una conexión por parte del cliente
@@ -69,6 +70,10 @@ public class Connector {
             System.out.println("Error: " + e.getMessage());
         }
     }
+    public void stopServer(){
+        
+    }
+    
 
     public void procesarTexto(String entrada) {
         StringReader sr = new StringReader(entrada);

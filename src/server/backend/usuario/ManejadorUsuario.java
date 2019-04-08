@@ -1,4 +1,4 @@
-package parrot.backend.usuario;
+package server.backend.usuario;
 
 /**
  *
