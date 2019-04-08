@@ -40,7 +40,7 @@ public class ManejadorParser {
     }
 
     public void showErrorMessege(String error) {
-        ManejadorLectorXML.getInstance().showErrorMessege(error);
+        Connector.getInstance().showErrorMessege(error);
         System.out.println(error);
     }
 
