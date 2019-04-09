@@ -161,4 +161,8 @@ public class ManejadorSitioWeb {
         writer.close();
     }
 
+    public List<SitioWeb> getListaSitioWeb() {
+        return listaSitioWeb;
+    }
+    
 }

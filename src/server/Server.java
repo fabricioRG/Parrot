@@ -6,7 +6,7 @@ import server.backend.manejadores.Connector;
  *
  * @author fabricio
  */
-public class Parrot {
+public class Server {
 
     /**
      * @param args the command line arguments

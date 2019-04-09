@@ -16,7 +16,9 @@ import server.backend.sitioweb.ManejadorSitioWeb;
 import server.backend.sitioweb.SitioWeb;
 import server.backend.sitioweb.SitioWebBuilder;
 import server.backend.titulo.ManejadorTitulo;
+import server.backend.usuario.Usuario;
 import server.backend.video.ManejadorVideo;
+import server.backend.xml.ExportadorXML;
 
 /**
  *
@@ -26,6 +28,7 @@ public class ManejadorParser {
 
     public static final String ABSOLUTH_PATH_SERVER = "/var/www/html";
     private static ManejadorParser INSTANCE = null;
+    private Usuario usuario = null;
 
     private ManejadorParser() {
     }
@@ -89,19 +92,19 @@ public class ManejadorParser {
         ManejadorTitulo.getInstance().setTitulo(parametro, option);
     }
 
-    public void setParrafo(String parametro, int option){
+    public void setParrafo(String parametro, int option) {
         ManejadorParrafo.getInstance().setParrafo(parametro, option);
     }
-    
-    public void setImagen(String parametro, int option){
+
+    public void setImagen(String parametro, int option) {
         ManejadorImagen.getInstance().setImagen(parametro, option);
     }
-    
-    public void setVideo(String parametro, int option){
+
+    public void setVideo(String parametro, int option) {
         ManejadorVideo.getInstance().setVideo(parametro, option);
     }
-    
-    public void setMenu(String parametro, int option){
+
+    public void setMenu(String parametro, int option) {
         try {
             ManejadorMenu.getInstance().setMenu(parametro, option);
         } catch (Exception e) {
@@ -109,37 +112,49 @@ public class ManejadorParser {
             e.printStackTrace();
         }
     }
-    
-    public void modifyPaginaWeb(String parametro, int option){
+
+    public void modifyPaginaWeb(String parametro, int option) {
         try {
             ManejadorPaginaWeb.getInstance().modifyPaginaWeb(parametro, option);
         } catch (Exception e) {
             ManejadorErrores.getInstance().errorByEmpty(e.getMessage());
         }
     }
-    
-    public void deleteSitioWeb(String parametro, int option){
+
+    public void deleteSitioWeb(String parametro, int option) {
         try {
             ManejadorSitioWeb.getInstance().deleteSitioWeb(parametro, option);
         } catch (Exception e) {
             ManejadorErrores.getInstance().errorByEmpty(e.getMessage());
         }
     }
-    
-    public void deletePaginaWeb(String parametro, int option){
+
+    public void deletePaginaWeb(String parametro, int option) {
         try {
             ManejadorPaginaWeb.getInstance().deletePaginaWeb(parametro, option);
         } catch (Exception e) {
             ManejadorErrores.getInstance().errorByEmpty(e.getMessage());
         }
     }
-    
-    public void deleteComponente(String parametro, int option){
+
+    public void deleteComponente(String parametro, int option) {
         try {
             ManejadorComponente.getInstance().deleteComponenteById(parametro, option);
         } catch (Exception e) {
             ManejadorErrores.getInstance().errorByEmpty(e.getMessage());
         }
+    }
+
+    public void updateComponente(String parametro, int option) {
+        try {
+            ManejadorComponente.getInstance().updateComponente(parametro, option);
+        } catch (Exception e) {
+            ManejadorErrores.getInstance().errorByEmpty(e.getMessage());
+        }
+    }
+
+    public void updateBaseDatos(){
+        ExportadorXML.getInstance().exportarXML();
     }
     
     public boolean isId(String id) {
@@ -153,4 +168,12 @@ public class ManejadorParser {
         return false;
     }
 
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
+    }
+    
 }

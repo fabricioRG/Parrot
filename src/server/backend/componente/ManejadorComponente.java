@@ -66,19 +66,56 @@ public class ManejadorComponente {
                 }
                 break;
             case 3:
-                if (ManejadorClase.getInstance().getClase() != null) {
-                    comp.setClase(ManejadorClase.getInstance().getClase());
-                    listaComponente.add(comp);
-                } else {
-                    errores = 1;
-                    throw new Exception("No es posible agregar el componente '" + comp.getId() + "'. Error en clase");
+                if (errores == 0) {
+                    if (ManejadorClase.getInstance().getClase() != null) {
+                        comp.setClase(ManejadorClase.getInstance().getClase());
+                        listaComponente.add(comp);
+                    } else {
+                        errores = 1;
+                        throw new Exception("No es posible agregar el componente '" + comp.getId() + "'. Error en clase");
+                    }
                 }
                 break;
         }
     }
-    
-    public void updateComonente(String parametro, int option){
-        
+
+    public void updateComponente(String parametro, int option) throws Exception {
+        String paramet = null;
+        if (parametro != null && !parametro.isEmpty()) {
+            paramet = parametro.substring(1, parametro.indexOf("]")).trim();
+        }
+        switch (option) {
+            case 1:
+                comp = new ComponenteBuilder().build();
+                if (getComponenteById(paramet) != null) {
+                    comp.setId(paramet);
+                } else {
+                    errores = 1;
+                    throw new Exception("No se ha podido modificar el componente '" + paramet + "'. El ID introducido no existe");
+                }
+                break;
+            case 2:
+                if (ManejadorPaginaWeb.getInstance().getPaginaWebById(paramet) != null) {
+                    comp.setPagina(ManejadorPaginaWeb.getInstance().getPaginaWebById(paramet));
+                } else {
+                    errores = 1;
+                    throw new Exception("No es posible modificar el componente '" + comp.getId() + "'. La pagina web '" + paramet + "'no existe");
+                }
+                break;
+            case 3:
+                if (errores == 0) {
+                    if (ManejadorClase.getInstance().getClase() != null) {
+                        comp.setClase(ManejadorClase.getInstance().getClase());
+                        getComponenteById(comp.getId()).setClase(comp.getClase());
+                    } else {
+                        throw new Exception("No es posible agregar el componente '" + comp.getId() + "'. Error en clase");
+                    }
+                } else {
+                    errores = 0;
+                }
+                System.out.println("");
+                break;
+        }
     }
 
     public void deleteComponenteById(String parametro, int option) throws Exception {
@@ -102,16 +139,16 @@ public class ManejadorComponente {
                 break;
             case 3:
                 if (errores == 0) {
-                    if(comp.getId() != null){
-                        if(getComponenteById(comp.getId()).getPagina().getId().equals(paramet)){
+                    if (comp.getId() != null) {
+                        if (getComponenteById(comp.getId()).getPagina().getId().equals(paramet)) {
                             comp.setPagina(getComponenteById(comp.getId()).getPagina());
                         } else {
                             errores = 1;
-                            throw new Exception("Pagina ID \""+ paramet +"\" no coincide con el ID de la pagina web del componente \""+ comp.getId() +"\"");
+                            throw new Exception("Pagina ID \"" + paramet + "\" no coincide con el ID de la pagina web del componente \"" + comp.getId() + "\"");
                         }
                     } else {
                         errores = 1;
-                        throw new Exception("No se ha podido eliminar el componente de la pagina \"" + paramet +"\". ID de componente no especificado");
+                        throw new Exception("No se ha podido eliminar el componente de la pagina \"" + paramet + "\". ID de componente no especificado");
                     }
                 }
                 break;
@@ -164,4 +201,8 @@ public class ManejadorComponente {
         return null;
     }
 
+    public List<Componente> getListaComponente() {
+        return listaComponente;
+    }
+    
 }

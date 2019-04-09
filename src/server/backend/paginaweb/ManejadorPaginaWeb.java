@@ -277,4 +277,8 @@ public class ManejadorPaginaWeb {
         }
     }
 
+    public List<PaginaWeb> getListaPaginaWeb() {
+        return listaPaginaWeb;
+    }
+
 }

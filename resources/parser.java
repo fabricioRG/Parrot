@@ -747,7 +747,7 @@ class CUP$parser$actions {
           case 1: // main ::= SIGNO_MENOR ACCIONES_ABIERTO SIGNO_MAYOR main2 SIGNO_MENOR ACCIONES_CERRADO SIGNO_MAYOR 
             {
               String RESULT =null;
-
+		mp.updateBaseDatos();
               CUP$parser$result = parser.getSymbolFactory().newSymbol("main",0, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-6)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -756,7 +756,7 @@ class CUP$parser$actions {
           case 2: // main ::= main3 
             {
               String RESULT =null;
-
+		mp.updateBaseDatos();
               CUP$parser$result = parser.getSymbolFactory().newSymbol("main",0, ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1359,7 +1359,7 @@ class CUP$parser$actions {
           case 65: // agregarComponente ::= accion6 SIGNO_MENOR PARAMETROS_ABIERTO SIGNO_MAYOR parametro6 SIGNO_MENOR PARAMETROS_CERRADO SIGNO_MAYOR SIGNO_MENOR ATRIBUTOS_ABIERTO SIGNO_MAYOR atributo1 SIGNO_MENOR ATRIBUTOS_CERRADO SIGNO_MAYOR SIGNO_MENOR ACCION_CERRADO SIGNO_MAYOR 
             {
               String RESULT =null;
-		mp.setClase(clase);if(agregar == 1){mp.setComponente(RESULT, 3);};
+		mp.setClase(clase);if(agregar == 1){mp.setComponente(null, 3);} else if (agregar==0){mp.updateComponente(null, 3);};
               CUP$parser$result = parser.getSymbolFactory().newSymbol("agregarComponente",10, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-17)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1368,7 +1368,7 @@ class CUP$parser$actions {
           case 66: // agregarComponente ::= accion6 SIGNO_MENOR PARAMETROS_ABIERTO SIGNO_MAYOR parametro7 SIGNO_MENOR PARAMETROS_CERRADO SIGNO_MAYOR SIGNO_MENOR ATRIBUTOS_ABIERTO SIGNO_MAYOR atributo1 SIGNO_MENOR ATRIBUTOS_CERRADO SIGNO_MAYOR SIGNO_MENOR ACCION_CERRADO SIGNO_MAYOR 
             {
               String RESULT =null;
-		mp.setClase(clase);if(agregar == 1){mp.setComponente(RESULT, 3);};
+		mp.setClase(clase);if(agregar == 1){mp.setComponente(null, 3);} else if (agregar==0){mp.updateComponente(null, 3);};
               CUP$parser$result = parser.getSymbolFactory().newSymbol("agregarComponente",10, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-17)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1377,7 +1377,7 @@ class CUP$parser$actions {
           case 67: // agregarComponente ::= accion6 SIGNO_MENOR PARAMETROS_ABIERTO SIGNO_MAYOR parametro8 SIGNO_MENOR PARAMETROS_CERRADO SIGNO_MAYOR SIGNO_MENOR ATRIBUTOS_ABIERTO SIGNO_MAYOR atributo2 SIGNO_MENOR ATRIBUTOS_CERRADO SIGNO_MAYOR SIGNO_MENOR ACCION_CERRADO SIGNO_MAYOR 
             {
               String RESULT =null;
-		mp.setClase(clase);if(agregar == 1){mp.setComponente(RESULT, 3);};
+		mp.setClase(clase);if(agregar == 1){mp.setComponente(null, 3);} else if (agregar==0){mp.updateComponente(null, 3);};
               CUP$parser$result = parser.getSymbolFactory().newSymbol("agregarComponente",10, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-17)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1386,7 +1386,7 @@ class CUP$parser$actions {
           case 68: // agregarComponente ::= accion6 SIGNO_MENOR PARAMETROS_ABIERTO SIGNO_MAYOR parametro9 SIGNO_MENOR PARAMETROS_CERRADO SIGNO_MAYOR SIGNO_MENOR ATRIBUTOS_ABIERTO SIGNO_MAYOR atributo3 SIGNO_MENOR ATRIBUTOS_CERRADO SIGNO_MAYOR SIGNO_MENOR ACCION_CERRADO SIGNO_MAYOR 
             {
               String RESULT =null;
-		mp.setClase(clase);if(agregar == 1){mp.setComponente(RESULT, 3);};
+		mp.setClase(clase);if(agregar == 1){mp.setComponente(null, 3);} else if (agregar==0){mp.updateComponente(null, 3);};
               CUP$parser$result = parser.getSymbolFactory().newSymbol("agregarComponente",10, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-17)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1395,7 +1395,7 @@ class CUP$parser$actions {
           case 69: // agregarComponente ::= accion6 SIGNO_MENOR PARAMETROS_ABIERTO SIGNO_MAYOR parametro10 SIGNO_MENOR PARAMETROS_CERRADO SIGNO_MAYOR SIGNO_MENOR ATRIBUTOS_ABIERTO SIGNO_MAYOR atributo4 SIGNO_MENOR ATRIBUTOS_CERRADO SIGNO_MAYOR SIGNO_MENOR ACCION_CERRADO SIGNO_MAYOR 
             {
               String RESULT =null;
-		mp.setClase(clase);if(agregar == 1){mp.setComponente(RESULT, 3);};
+		mp.setClase(clase);if(agregar == 1){mp.setComponente(null, 3);} else if (agregar==0){mp.updateComponente(null, 3);};
               CUP$parser$result = parser.getSymbolFactory().newSymbol("agregarComponente",10, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-17)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1488,7 +1488,7 @@ class CUP$parser$actions {
 		int e1left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
 		int e1right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
 		String e1 = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
-		RESULT = e1;if(agregar==1){mp.setComponente(RESULT, 1);}else if(agregar==0){};
+		RESULT = e1;if(agregar==1){mp.setComponente(RESULT, 1);}else if(agregar==0){mp.updateComponente(RESULT, 1);};
               CUP$parser$result = parser.getSymbolFactory().newSymbol("id",52, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;
@@ -1500,7 +1500,7 @@ class CUP$parser$actions {
 		int e2left = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).left;
 		int e2right = ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-3)).right;
 		String e2 = (String)((java_cup.runtime.Symbol) CUP$parser$stack.elementAt(CUP$parser$top-3)).value;
-		RESULT = e2;if(agregar==1){mp.setComponente(RESULT, 2);}else if(agregar==0){};
+		RESULT = e2;if(agregar==1){mp.setComponente(RESULT, 2);}else if(agregar==0){mp.updateComponente(RESULT, 2);};
               CUP$parser$result = parser.getSymbolFactory().newSymbol("pagina",53, ((java_cup.runtime.Symbol)CUP$parser$stack.elementAt(CUP$parser$top-9)), ((java_cup.runtime.Symbol)CUP$parser$stack.peek()), RESULT);
             }
           return CUP$parser$result;

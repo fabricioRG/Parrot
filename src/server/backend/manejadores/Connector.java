@@ -7,6 +7,7 @@ import java.net.*;
 import java.io.*;
 import server.ServidorFrontend;
 import server.backend.manejadores.ManejadorParser;
+import server.backend.usuario.UsuarioBuilder;
 
 /**
  *
@@ -74,7 +75,10 @@ public class Connector {
     
 
     public void procesarTexto(String entrada) {
-        StringReader sr = new StringReader(entrada);
+        String entrada1 = entrada.substring(1, entrada.indexOf(")"));
+        ManejadorParser.getInstance().setUsuario(new UsuarioBuilder().id(entrada1).build());
+        String entrada2 = entrada.substring(entrada.indexOf(")") + 3, entrada.length() - 1);
+        StringReader sr = new StringReader(entrada2);
         Lexer1 lexer = new Lexer1(sr);
         parser pars = new parser(lexer, ManejadorParser.getInstance());
         try {
