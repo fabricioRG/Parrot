@@ -1,11 +1,12 @@
-package parrot.backend.manejadores;
+package server.backend.manejadores;
 
 import java.io.StringReader;
-import parrot.backend.analizadores.Lexer1;
-import parrot.backend.analizadores.parser;
+import server.backend.analizadores.Lexer1;
+import server.backend.analizadores.parser;
 import java.net.*;
 import java.io.*;
-import parrot.ServidorFrontend;
+import server.ServidorFrontend;
+import server.backend.manejadores.ManejadorParser;
 
 /**
  *
@@ -15,7 +16,7 @@ public class Connector {
 
     private static Connector INSTANCE = null;
 
-    final int PUERTO = 8000;
+    final int PUERTO = 8600;
     ServerSocket sc;
     Socket so;
     DataOutputStream salida;
@@ -69,9 +70,6 @@ public class Connector {
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
-    }
-    public void stopServer(){
-        
     }
     
 

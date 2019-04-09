@@ -1,4 +1,4 @@
-package parrot.backend.parrafo;
+package server.backend.parrafo;
 
 /**
  *
@@ -31,22 +31,26 @@ public class ManejadorParrafo {
         }
         switch(option){
             case 1:
-                parrafo = new ParrafoBuilder().texto(paramet).build();
+                parrafo = new ParrafoBuilder().build();
                 break;
             case 2:
-                parrafo.setAlineacion(paramet);
+                parrafo.setTexto(paramet);
                 break;
             case 3:
+                parrafo.setAlineacion(paramet);
+                break;
+            case 4:
                 parrafo.setColor(paramet);
                 break;
         }
         
     }
 
-    public Parrafo getParrafo() {
+    public Parrafo getParrafo() throws Exception {
         if(parrafo.getTexto() == null){
-            return null;
+            throw new Exception("Texto en clase \"Parrafo\" vacio. Intentelo de nuevo");
         }
+        System.out.println(parrafo.getTexto());
         return parrafo;
     }
 }

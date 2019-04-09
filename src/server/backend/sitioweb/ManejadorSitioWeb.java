@@ -1,4 +1,4 @@
-package parrot.backend.sitioweb;
+package server.backend.sitioweb;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -9,8 +9,9 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.DataFormatException;
-import parrot.backend.manejadores.ManejadorParser;
-import parrot.backend.xml.ExportadorXML;
+import server.backend.manejadores.ManejadorParser;
+import server.backend.paginaweb.ManejadorPaginaWeb;
+import server.backend.xml.ExportadorXML;
 
 /**
  *
@@ -73,7 +74,7 @@ public class ManejadorSitioWeb {
                     sw.setId(paramet);
                 } else {
                     errores = 1;
-                    throw new Exception("No se ha podido crear el sitio web '"+ paramet +"'. El ID introducido ya existe");
+                    throw new Exception("No se ha podido crear el sitio web '" + paramet + "'. El ID introducido ya existe");
                 }
                 break;
             case 5:
@@ -83,21 +84,62 @@ public class ManejadorSitioWeb {
                 sw.setUsuarioModificacion(paramet);
                 break;
             case 7:
-                if (sw.getId() == null) {
-                    errores = 1;
-                    throw new Exception("No se ha podido crear el sitio web, no se ha especificado ID");
-                }
-                sw.setPath(ABSOLUTH_PATH_SERVER + "/" + sw.getId());
-                listaSitioWeb.add(sw);
+                if (errores == 0) {
+                    if (sw.getId() == null) {
+                        throw new Exception("No se ha podido crear el sitio web, no se ha especificado ID");
+                    }
+                    sw.setPath(ABSOLUTH_PATH_SERVER + "/" + sw.getId());
+                    errores = 0;
+                    listaSitioWeb.add(sw);
 //                createDirectory("/" + sw.getId());
 //                ExportadorXML.getInstance().exportarSitioWeb(sw);
-                System.out.println(sw.getId());
-                System.out.println(sw.getFechaCreacion());
-                System.out.println(sw.getFechaModificacion());
-                System.out.println(sw.getUsuarioCreacion());
-                System.out.println(sw.getUsuarioModificacion());
+                    System.out.println(sw.getId());
+                }
+        }
+    }
+
+    public void deleteSitioWeb(String parametro, int option) throws Exception {
+        String paramet = "";
+        if (parametro != null && !parametro.isEmpty()) {
+            paramet = parametro.substring(1, parametro.indexOf("]")).trim();
+        }
+        switch (option) {
+            case 1:
+                sw = new SitioWebBuilder().build();
+                break;
+            case 2:
+                if (getSitioWebById(paramet) != null) {
+                    sw.setId(paramet);
+                } else {
+                    errores = 1;
+                    throw new Exception("No se ha podido eliminar el sitio web \""+paramet+"\", ID no encontrado");
+                }
+                break;
+            case 3:
+                if(errores == 0){
+                    removeSitioWeb(sw.getId());
+                } else {
+                    errores = 0;
+                }
                 break;
         }
+    }
+
+    public void removeSitioWeb(String id) {
+        List<SitioWeb> sitios = new LinkedList<>();
+        System.out.println("");
+        for (SitioWeb sitioWeb : listaSitioWeb) {
+            if(sitioWeb.getId().equals(id)){
+            ManejadorPaginaWeb.getInstance().removePaginasBySitioId(id);
+            } else {
+                sitios.add(sitioWeb);
+            }
+        }
+        listaSitioWeb.clear();
+        if(!sitios.isEmpty()){
+            listaSitioWeb.addAll(sitios);
+        }
+        System.out.println("");
     }
 
     public SitioWeb getSitioWebById(String id) {

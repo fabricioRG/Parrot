@@ -1,12 +1,12 @@
-package parrot.backend.xml;
+package server.backend.xml;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
-import parrot.backend.paginaweb.PaginaWeb;
-import parrot.backend.sitioweb.SitioWeb;
-import parrot.backend.sitioweb.SitioWebBuilder;
+import server.backend.paginaweb.PaginaWeb;
+import server.backend.sitioweb.SitioWeb;
+import server.backend.sitioweb.SitioWebBuilder;
 
 /**
  *

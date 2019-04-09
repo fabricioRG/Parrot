@@ -1,4 +1,4 @@
-package parrot.backend.etiqueta;
+package server.backend.etiqueta;
 
 /**
  *

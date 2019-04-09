@@ -1,4 +1,4 @@
-package parrot.backend.parrafo;
+package server.backend.parrafo;
 
 /**
  *

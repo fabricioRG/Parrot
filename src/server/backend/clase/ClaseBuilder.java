@@ -1,10 +1,10 @@
-package parrot.backend.clase;
+package server.backend.clase;
 
-import parrot.backend.menu.Menu;
-import parrot.backend.video.Video;
-import parrot.backend.imagen.Imagen;
-import parrot.backend.parrafo.Parrafo;
-import parrot.backend.titulo.Titulo;
+import server.backend.menu.Menu;
+import server.backend.video.Video;
+import server.backend.imagen.Imagen;
+import server.backend.parrafo.Parrafo;
+import server.backend.titulo.Titulo;
 
 /**
  *

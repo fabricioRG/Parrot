@@ -1,4 +1,4 @@
-package parrot.backend.error;
+package server.backend.error;
 
 /**
  *

@@ -1,14 +1,14 @@
-package parrot.backend.video;
+package server.backend.video;
 
 /**
  *
  * @author fabricio
  */
 public class VideoBuilder {
+    
     String origen;
-    String alineacion;
-    int altura;
-    int ancho;
+    int altura = 0;
+    int ancho = 0;
 
     public VideoBuilder() {
     }
@@ -29,7 +29,7 @@ public class VideoBuilder {
     }
     
     public Video build(){
-        return new Video(this);
+        return new Video (this);
     }
 
     public String getOrigen() {

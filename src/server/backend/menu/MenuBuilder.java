@@ -1,7 +1,7 @@
-package parrot.backend.menu;
+package server.backend.menu;
 
-import parrot.backend.etiqueta.Etiqueta;
-import parrot.backend.paginaweb.PaginaWeb;
+import server.backend.etiqueta.Etiqueta;
+import server.backend.paginaweb.PaginaWeb;
 
 /**
  *

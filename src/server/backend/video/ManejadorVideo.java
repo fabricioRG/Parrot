@@ -1,5 +1,5 @@
 
-package parrot.backend.video;
+package server.backend.video;
 
 /**
  *
@@ -34,30 +34,34 @@ private Video video = null;
          3       -                 Ancho
      */
     
-    public void setImagen(String parametro, int option){
+    public void setVideo(String parametro, int option){
         String paramet = null;
         if (parametro != null && !parametro.isEmpty()) {
             paramet = parametro.substring(1, parametro.indexOf("]")).trim();
         }
         switch(option){
             case 1:
-                video = new VideoBuilder().origen(paramet).build();
+                video = new VideoBuilder().build();
                 break;
             case 2:
-                video.setAltura(Integer.parseInt(paramet));
+                video.setOrigen(paramet);
                 break;
             case 3:
+                video.setAltura(Integer.parseInt(paramet));
+                break;
+            case 4:
                 video.setAncho(Integer.parseInt(paramet));
                 break;
         }
     }
 
-    public Video getVideo() {
+    public Video getVideo() throws Exception {
         if(video.getOrigen() == null){
-            video = null;
+            throw new Exception("Origen en clase \"Video\" vacio. Intentelo de nuevo");
         } else if (video.getAltura() == 0 || video.getAncho() == 0){
-            video = null;
+            throw new Exception("Altura y/u origen en clase \"Video\" vacio. Intentelo de nuevo");
         }
+        System.out.println(video.getOrigen());
         return video;
     }
 }

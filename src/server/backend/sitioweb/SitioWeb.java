@@ -1,4 +1,4 @@
-package parrot.backend.sitioweb;
+package server.backend.sitioweb;
 
 import java.util.Date;
 

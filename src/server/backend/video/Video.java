@@ -1,4 +1,4 @@
-package parrot.backend.video;
+package server.backend.video;
 
 /**
  *
@@ -7,8 +7,8 @@ package parrot.backend.video;
 public class Video {
     
    String origen;
-    int altura;
-    int ancho;
+    int altura = 0;
+    int ancho = 0;
     
     Video (VideoBuilder builder){
         this.origen = builder.getOrigen();

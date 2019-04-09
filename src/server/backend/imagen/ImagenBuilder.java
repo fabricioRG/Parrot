@@ -1,4 +1,4 @@
-package parrot.backend.imagen;
+package server.backend.imagen;
 
 /**
  *

@@ -1,8 +1,11 @@
-package parrot.backend.clase;
+package server.backend.clase;
 
 import java.text.ParseException;
-import parrot.backend.parrafo.ManejadorParrafo;
-import parrot.backend.titulo.ManejadorTitulo;
+import server.backend.imagen.ManejadorImagen;
+import server.backend.menu.ManejadorMenu;
+import server.backend.parrafo.ManejadorParrafo;
+import server.backend.titulo.ManejadorTitulo;
+import server.backend.video.ManejadorVideo;
 
 /**
  *
@@ -10,25 +13,25 @@ import parrot.backend.titulo.ManejadorTitulo;
  */
 public class ManejadorClase {
 
-private static ManejadorClase INSTANCE = null;
-private Clase clase = null;
+    private static ManejadorClase INSTANCE = null;
+    private Clase clase = null;
 
     private ManejadorClase() {
     }
-    
-    private synchronized static void createInstance(){
-        if (INSTANCE == null){
+
+    private synchronized static void createInstance() {
+        if (INSTANCE == null) {
             INSTANCE = new ManejadorClase();
         }
     }
-    
-    public static ManejadorClase getInstance(){
-        if(INSTANCE == null){
+
+    public static ManejadorClase getInstance() {
+        if (INSTANCE == null) {
             createInstance();
         }
         return INSTANCE;
     }
-    
+
     /* Metodo que recibe parametros de tipo string y opciones tipo int, los cuales
     al reconocerse su tipo realizan una accion especifica los cuales son:
     OPTION                      ACCION
@@ -38,31 +41,33 @@ private Clase clase = null;
          4       -                  Video
          5       -                  Menu
      */
-    
     public void setClase(int option) throws Exception {
-        switch(option){
+        clase = new ClaseBuilder().build();
+        switch (option) {
             case 1:
-                if(ManejadorTitulo.getInstance().getTitulo()!=null){
+                if (ManejadorTitulo.getInstance().getTitulo() != null) {
                     clase.setTitulo(ManejadorTitulo.getInstance().getTitulo());
-                } else {
-                    clase = null;
                 }
                 break;
             case 2:
-                if(ManejadorParrafo.getInstance().getParrafo()!=null){
+                if (ManejadorParrafo.getInstance().getParrafo() != null) {
                     clase.setParrafo(ManejadorParrafo.getInstance().getParrafo());
-                } else {
-                    clase = null;
                 }
                 break;
             case 3:
-                
+                if (ManejadorImagen.getInstance().getImagen() != null) {
+                    clase.setImagen(ManejadorImagen.getInstance().getImagen());
+                }
                 break;
             case 4:
-                
+                if (ManejadorVideo.getInstance().getVideo() != null) {
+                    clase.setVideo(ManejadorVideo.getInstance().getVideo());
+                }
                 break;
             case 5:
-                
+                if (ManejadorMenu.getInstance().getMenu() != null) {
+                    clase.setMenu(ManejadorMenu.getInstance().getMenu());
+                }
                 break;
         }
     }
@@ -70,5 +75,5 @@ private Clase clase = null;
     public Clase getClase() throws Exception {
         return clase;
     }
-    
+
 }

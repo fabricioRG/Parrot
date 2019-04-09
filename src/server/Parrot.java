@@ -1,6 +1,6 @@
-package parrot;
+package server;
 
-import parrot.backend.manejadores.Connector;
+import server.backend.manejadores.Connector;
 
 /**
  *

@@ -1,9 +1,9 @@
-package parrot.backend.xml;
+package server.backend.xml;
 
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
-import parrot.backend.sitioweb.SitioWeb;
+import server.backend.sitioweb.SitioWeb;
 
 /**
  *

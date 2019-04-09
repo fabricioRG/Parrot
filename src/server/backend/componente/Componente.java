@@ -1,7 +1,7 @@
-package parrot.backend.componente;
+package server.backend.componente;
 
-import parrot.backend.clase.Clase;
-import parrot.backend.paginaweb.PaginaWeb;
+import server.backend.clase.Clase;
+import server.backend.paginaweb.PaginaWeb;
 
 /**
  *

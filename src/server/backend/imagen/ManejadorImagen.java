@@ -1,4 +1,4 @@
-package parrot.backend.imagen;
+package server.backend.imagen;
 
 /**
  *
@@ -41,26 +41,30 @@ public class ManejadorImagen {
         }
         switch(option){
             case 1:
-                imagen = new ImagenBuilder().origen(paramet).build();
+                imagen = new ImagenBuilder().build();
                 break;
             case 2:
-                imagen.setAlineacion(paramet);
+                imagen.setOrigen(paramet);
                 break;
             case 3:
-                imagen.setAltura(Integer.parseInt(paramet));
+                imagen.setAlineacion(paramet);
                 break;
             case 4:
+                imagen.setAltura(Integer.parseInt(paramet));
+                break;
+            case 5:
                 imagen.setAncho(Integer.parseInt(paramet));
                 break;
         }
     }
 
-    public Imagen getImagen() {
+    public Imagen getImagen() throws Exception {
         if(imagen.getOrigen() == null){
-            imagen = null;
+            throw new Exception("Origen en clase \"Imagen\" vacio. Intentelo de nuevo");
         } else if (imagen.getAltura() == 0 || imagen.getAncho() == 0){
-            imagen = null;
+            throw new Exception("Altura y/u origen en clase \"Imagen\" vacio. Intentelo de nuevo");
         }
+        System.out.println(imagen.getOrigen());
         return imagen;
     }
     

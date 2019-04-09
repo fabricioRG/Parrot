@@ -1,8 +1,8 @@
-package parrot.backend.paginaweb;
+package server.backend.paginaweb; 
 
-import parrot.backend.sitioweb.SitioWeb;
+import server.backend.sitioweb.SitioWeb;
 import java.util.Date;
-import parrot.backend.etiqueta.Etiqueta;
+import server.backend.etiqueta.Etiqueta;
 
 /**
  *

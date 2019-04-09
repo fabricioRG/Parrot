@@ -1,4 +1,4 @@
-package parrot.backend.titulo;
+package server.backend.titulo;
 
 /**
  *
@@ -6,9 +6,9 @@ package parrot.backend.titulo;
  */
 public class Titulo {
 
-    String texto;
-    String alineacion;
-    String color;
+    private String texto;
+    private String alineacion;
+    private String color;
     
     Titulo (TituloBuilder builder){
         this.texto = builder.getTexto();

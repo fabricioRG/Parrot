@@ -1,14 +1,15 @@
-package parrot.backend.paginaweb;
+package server.backend.paginaweb;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
-import parrot.backend.etiqueta.Etiqueta;
-import parrot.backend.etiqueta.EtiquetaBuilder;
-import parrot.backend.etiqueta.ManejadorEtiqueta;
-import parrot.backend.manejadores.ManejadorParser;
-import parrot.backend.sitioweb.ManejadorSitioWeb;
+import server.backend.componente.ManejadorComponente;
+import server.backend.etiqueta.Etiqueta;
+import server.backend.etiqueta.EtiquetaBuilder;
+import server.backend.etiqueta.ManejadorEtiqueta;
+import server.backend.manejadores.ManejadorParser;
+import server.backend.sitioweb.ManejadorSitioWeb;
 
 /**
  *
@@ -21,6 +22,7 @@ public class ManejadorPaginaWeb {
     private List<PaginaWeb> listaPaginaWeb = null;
     private PaginaWeb pw = null;
     private int errores = 0;
+    private int modificacion = 0;
 
     private ManejadorPaginaWeb() {
         fechaFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -131,11 +133,65 @@ public class ManejadorPaginaWeb {
                 }
                 if (errores == 0) {
                     listaPaginaWeb.add(pw);
+                    System.out.println(pw.getId());
                 } else {
                     errores = 0;
                     pw = null;
                 }
-                System.out.println("algo");
+                break;
+        }
+    }
+
+    public void modifyPaginaWeb(String parametro, int option) throws Exception {
+        String paramet = null;
+        if (option == 4) {
+            if (parametro != null && !parametro.isEmpty()) {
+                paramet = parametro.substring(1, parametro.length() - 1);
+            }
+        } else {
+            if (parametro != null && !parametro.isEmpty()) {
+                paramet = parametro.substring(1, parametro.indexOf("]")).trim();
+            }
+        }
+        switch (option) {
+            case 1:
+                pw = new PaginaWebBuilder().build();
+                break;
+            case 2:
+                if (getPaginaWebById(paramet) != null) {
+                    pw.setId(getPaginaWebById(paramet).getId());
+                } else {
+                    errores = 1;
+                    throw new Exception("No se ha podido modificar la pagina web \"" + paramet + "\". El ID no existe");
+                }
+                break;
+            case 3:
+                modificacion = 1;
+                pw.setTitulo(paramet);
+                break;
+            case 4:
+                modificacion = 1;
+                if (pw.getEtiquetaCabeza() == null) {
+                    pw.setEtiquetaCabeza(new EtiquetaBuilder().valor(paramet).build());
+                } else {
+                    ManejadorEtiqueta.getInstance().addEtiquetaToNext(new EtiquetaBuilder().valor(paramet).build(), pw.getEtiquetaCabeza());
+                }
+                break;
+            case 5:
+                if (errores == 0) {
+                    if (pw.getId() != null) {
+                        if (modificacion == 1) {
+                            modifyAtributosPagina(pw);
+                            modificacion = 0;
+                        } else {
+                            throw new Exception("No se ha especificado algun parametro para modificar la pagina web \" "+ pw.getId() +"\"");
+                        }
+                    } else {
+                        throw new Exception("No se ha especificado el ID de la pagina web a modificar.");
+                    }
+                } else {
+                    errores = 0;
+                }
                 break;
         }
     }
@@ -147,6 +203,78 @@ public class ManejadorPaginaWeb {
             }
         }
         return null;
+    }
+    
+    public void deletePaginaWeb(String parametro, int option) throws Exception{
+        String paramet = "";
+        if (parametro != null && !parametro.isEmpty()) {
+            paramet = parametro.substring(1, parametro.indexOf("]")).trim();
+        }
+        switch (option) {
+            case 1:
+                pw = new PaginaWebBuilder().build();
+                break;
+            case 2:
+                if (getPaginaWebById(paramet) != null) {
+                    pw.setId(paramet);
+                } else {
+                    errores = 1;
+                    throw new Exception("No se ha podido eliminar el sitio web \""+paramet+"\", ID no encontrado");
+                }
+                break;
+            case 3:
+                if(errores == 0){
+                    removePaginaById(pw.getId());
+                } else {
+                    errores = 0;
+                }
+                break;
+        }
+    }
+    
+    public void removePaginasBySitioId(String id){
+        List<PaginaWeb> paginas = new LinkedList<>();
+        System.out.println("");
+        for (PaginaWeb paginaWeb : listaPaginaWeb) {
+            if(paginaWeb.getSitio().getId().equals(id)){
+                ManejadorComponente.getInstance().removeComponentesByPaginaId(paginaWeb.getId());
+            } else {
+                paginas.add(paginaWeb);
+            }
+        }
+        listaPaginaWeb.clear();
+        if(!paginas.isEmpty()){
+            listaPaginaWeb.addAll(paginas);
+        }
+        
+        System.out.println("");
+    }
+    
+    public void removePaginaById(String id){
+        List<PaginaWeb> paginas = new LinkedList<>();
+        System.out.println("");
+        for (PaginaWeb paginaWeb : listaPaginaWeb) {
+            if(paginaWeb.getId().equals(id)){
+                ManejadorComponente.getInstance().removeComponentesByPaginaId(id);
+            } else {
+                paginas.add(paginaWeb);
+            }
+        }
+        listaPaginaWeb.clear();
+        if(!paginas.isEmpty()){
+            listaPaginaWeb.addAll(paginas);
+        }
+        System.out.println("");
+    }
+
+    private void modifyAtributosPagina(PaginaWeb pg) {
+        if (pg.getTitulo() != null) {
+            getPaginaWebById(pg.getId()).setTitulo(pg.getTitulo());
+            System.out.println(getPaginaWebById(pg.getId()).getTitulo());
+        }
+        if (pg.getEtiquetaCabeza() != null) {
+            getPaginaWebById(pg.getId()).setEtiquetaCabeza(pg.getEtiquetaCabeza());
+        }
     }
 
 }

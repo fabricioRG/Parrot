@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/home/fabricio/NetBeansProjects/server/src/server/backend/sitioweb/ManejadorSitioWeb.java</file>
+            <file>file:/home/fabricio/NetBeansProjects/server/src/server/backend/paginaweb/ManejadorPaginaWeb.java</file>
+            <file>file:/home/fabricio/NetBeansProjects/server/src/server/backend/etiqueta/ManejadorEtiqueta.java</file>
+            <file>file:/home/fabricio/NetBeansProjects/server/src/server/ServidorFrontend.java</file>
+            <file>file:/home/fabricio/NetBeansProjects/server/src/server/backend/menu/ManejadorMenu.java</file>
+            <file>file:/home/fabricio/NetBeansProjects/server/src/server/backend/manejadores/ManejadorParser.java</file>
+            <file>file:/home/fabricio/NetBeansProjects/server/src/server/backend/clase/ManejadorClase.java</file>
+        </group>
     </open-files>
 </project-private>

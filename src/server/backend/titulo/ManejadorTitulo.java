@@ -1,4 +1,4 @@
-package parrot.backend.titulo;
+package server.backend.titulo;
 
 /**
  *
@@ -40,22 +40,25 @@ private Titulo titulo = null;
         }
         switch(option){
             case 1:
-                titulo = new TituloBuilder().texto(paramet).build();
+                titulo = new TituloBuilder().build();
                 break;
             case 2:
-                titulo.setAlineacion(paramet);
+                titulo.setTexto(paramet);
                 break;
             case 3:
+                titulo.setAlineacion(paramet);
+                break;
+            case 4:                
                 titulo.setColor(paramet);
                 break;
         }
-        
     }
 
-    public Titulo getTitulo() {
+    public Titulo getTitulo() throws Exception {
         if(titulo.getTexto() == null){
-            titulo = null;
+            throw new Exception("Texto en clase \"Titulo\" vacio. Intentelo de nuevo.");
         }
+        System.out.println(titulo.getTexto());
         return titulo;
     }
     
