@@ -4,6 +4,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import server.backend.componente.Componente;
@@ -168,10 +169,12 @@ public class ExportadorXML {
     private String getPaginaXML(PaginaWeb pw) {
         String salida = PAGINA_WEB_AB + SALTO_LN;
         if (pw.getFechaCreacion() == null) {
-
+            Date fecha = new Date();
+            pw.setFechaCreacion(fecha);
         }
         if (pw.getFechaModificacion() == null) {
-
+            Date fecha = new Date();
+            pw.setFechaModificacion(fecha);
         }
         if (pw.getUsuarioCreacion() == null) {
             pw.setUsuarioCreacion(ManejadorParser.getInstance().getUsuario().getId());
