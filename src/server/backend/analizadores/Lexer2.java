@@ -3,7 +3,7 @@
  package server.backend.analizadores;
 
 import java_cup.runtime.*;
-import static parrot.backend.analizadores.sym2.*;
+import static server.backend.analizadores.sym2.*;
 
 
 /**

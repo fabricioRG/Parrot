@@ -32,7 +32,7 @@ public class ManejadorHTML {
     private SimpleDateFormat fechaFormat = null;
     public static final String HTML_AB = "<html>";
     public static final String HTML_CE = "</html>";
-    public static final String BODY_AB = "<body>";
+    public static final String BODY_AB = "<body><meta name=\"tipo_contenido\"  content=\"text/html;\" http-equiv=\"content-type\" charset=\"utf-8\">";
     public static final String BODY_CE = "</body>";
     public static final String HEAD_AB = "<head>";
     public static final String HEAD_CE = "</head>";
@@ -133,11 +133,20 @@ public class ManejadorHTML {
         if (!ManejadorPaginaWeb.getInstance().getListaPaginaWeb().isEmpty()) {
             paginas.addAll(ManejadorPaginaWeb.getInstance().getListaPaginaWeb());
         }
-        String salida = HTML_AB + SALTO_LN + BODY_AB + SALTO_LN + TITULO_NORMAL + "Index of \"" + sw.getId() + "\"" + TITULO_CE + SALTO_LN
-                + LISTA_AB;
+        String salida = HTML_AB + SALTO_LN + BODY_AB + SALTO_LN + TITULO_NORMAL + "Index of \"" + sw.getId() + "\"" 
+                + TITULO_CE + "\n<h4>Paginas Hermanas</h4>" + SALTO_LN + LISTA_AB;
         for (PaginaWeb pagina : paginas) {
             if (pagina.getSitio().getId().equals(sw.getId())) {
                 if (pagina.getPadre() == null) {
+                    crearPaginas(sw.getPath() + "/" + pagina.getId() + HTML, pagina);
+                    salida = salida + getEtiqueta(pagina);
+                }
+            }
+        }
+        salida = salida + LISTA_CE + SALTO_LN + "\n<h4>Paginas Hijas</h4>\n" + LISTA_AB;
+        for (PaginaWeb pagina : paginas) {
+            if (pagina.getSitio().getId().equals(sw.getId())) {
+                if (pagina.getPadre() != null) {
                     crearPaginas(sw.getPath() + "/" + pagina.getId() + HTML, pagina);
                     salida = salida + getEtiqueta(pagina);
                 }

@@ -50,7 +50,7 @@ public class ManejadorComponente {
         switch (option) {
             case 1:
                 comp = new ComponenteBuilder().build();
-                if (!ManejadorParser.getInstance().isId(paramet)) {
+                if (getComponenteById(paramet) == null) {
                     comp.setId(paramet);
                 } else {
                     errores = 1;

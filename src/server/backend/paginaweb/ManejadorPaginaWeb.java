@@ -73,7 +73,7 @@ public class ManejadorPaginaWeb {
                 pw = new PaginaWebBuilder().build();
                 break;
             case 2:
-                if (!ManejadorParser.getInstance().isId(paramet)) {
+                if (getPaginaWebById(paramet) == null) {
                     pw.setId(paramet);
                 } else {
                     errores = 1;
@@ -280,6 +280,10 @@ public class ManejadorPaginaWeb {
 
     public List<PaginaWeb> getListaPaginaWeb() {
         return listaPaginaWeb;
+    }
+
+    public PaginaWeb getPw() {
+        return pw;
     }
 
 }

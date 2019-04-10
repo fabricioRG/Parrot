@@ -206,8 +206,8 @@ public class ExportadorXML {
                 + FECHA_MOD_CE + SALTO_LN;
         String usuarioModificacion = USUARIO_MOD_AB + CORCH_ABIERTO + pw.getUsuarioModificacion() + CORCH_CERRADO
                 + USUARIO_MOD_CE + SALTO_LN;
-        salida = salida + usuarioCreacion + fechaCreacion + fechaModificacion + usuarioModificacion + getComponenteXML(pw)
-                + getEtiquetaXML(pw.getEtiquetaCabeza())+ PAGINA_WEB_CE + SALTO_LN;
+        salida = salida + usuarioCreacion + fechaCreacion + fechaModificacion + usuarioModificacion + getEtiquetaXML(pw.getEtiquetaCabeza())
+                + getComponenteXML(pw) + PAGINA_WEB_CE + SALTO_LN;
         return salida;
     }
 

@@ -70,7 +70,7 @@ public class ManejadorSitioWeb {
                 sw.setFechaModificacion(fechaFormat.parse(paramet));
                 break;
             case 4:
-                if (!ManejadorParser.getInstance().isId(paramet)) {
+                if (getSitioWebById(paramet) == null) {
                     sw.setId(paramet);
                 } else {
                     errores = 1;
@@ -163,6 +163,10 @@ public class ManejadorSitioWeb {
 
     public List<SitioWeb> getListaSitioWeb() {
         return listaSitioWeb;
+    }
+
+    public SitioWeb getSw() {
+        return sw;
     }
     
 }

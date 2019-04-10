@@ -7,6 +7,7 @@ package server.backend.error;
 public class ManejadorErrores {
 
     private static ManejadorErrores INSTANCE = null;
+    private String errores = "";
 
     private ManejadorErrores() {
     }
@@ -29,7 +30,7 @@ public class ManejadorErrores {
     }
     
     public void errorByEmpty(String error){
-        System.out.println(error);
+        errores = errores + "> " + error + "\n";
     }
     
 }

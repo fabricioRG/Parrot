@@ -1,1 +1,0 @@
-parrot.backend.usuario.ManejadorUsuario
