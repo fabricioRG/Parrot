@@ -30,7 +30,15 @@ public class ManejadorErrores {
     }
     
     public void errorByEmpty(String error){
-        errores = errores + "> " + error + "\n";
+        errores = errores + "> Error: " + error + "\n";
+    }
+    
+    public void accionExitosa(String accion){
+        errores = errores + "> Exito: " + accion + "\n";
+    }
+
+    public String getErrores() {
+        return errores;
     }
     
 }

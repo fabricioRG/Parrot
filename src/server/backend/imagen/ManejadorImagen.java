@@ -64,7 +64,6 @@ public class ManejadorImagen {
         } else if (imagen.getAltura() == 0 || imagen.getAncho() == 0){
             throw new Exception("Altura y/u origen en clase \"Imagen\" vacio. Intentelo de nuevo");
         }
-        System.out.println(imagen.getOrigen());
         return imagen;
     }
     

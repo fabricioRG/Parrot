@@ -6,6 +6,7 @@ import server.backend.analizadores.parser;
 import java.net.*;
 import java.io.*;
 import server.ServidorFrontend;
+import server.backend.error.ManejadorErrores;
 import server.backend.manejadores.ManejadorParser;
 import server.backend.usuario.UsuarioBuilder;
 
@@ -16,12 +17,6 @@ import server.backend.usuario.UsuarioBuilder;
 public class Connector {
 
     private static Connector INSTANCE = null;
-
-    final int PUERTO = 8600;
-    ServerSocket sc;
-    Socket so;
-    DataOutputStream salida;
-    String mensajeRecibido;
 
     private Connector() {
     }
@@ -41,38 +36,43 @@ public class Connector {
 
 //SERVIDOR
     public void initServer(ServidorFrontend sf) {
-        BufferedReader entrada;
-
         try {
-            sc = new ServerSocket(PUERTO);/* crea socket servidor que escuchara en puerto 5000*/
-            so = new Socket();
-            System.out.println("Esperando una conexion:");
-            so = sc.accept();
+           final  int PUERTO = 5000;
+            ServerSocket servidor = null;
+            Socket sc = null;
+            DataInputStream in;
+            DataOutputStream out;
 
-            //Inicia el socket, ahora esta esperando una conexión por parte del cliente
-            System.out.println("Un cliente se ha conectado.");
+            servidor = new ServerSocket(PUERTO);/* crea socket servidor que escuchara en puerto 5000*/
+            System.out.println("Servidor iniciado");
+            sf.getjTextPane().setText("Servidor Iniciado");
 
-            //Canales de entrada y salida de datos
-            entrada = new BufferedReader(new InputStreamReader(so.getInputStream()));
-            salida = new DataOutputStream(so.getOutputStream());
-            System.out.println("Confirmando conexion al cliente....");
+            while (true) {
+                sc = servidor.accept();
+                
+                System.out.println("Cliente conectado");
+                sf.getjTextPane().setText("Cliente conectado");
+                
+                in = new DataInputStream(sc.getInputStream());
+                out = new DataOutputStream(sc.getOutputStream());
+                
+                String mensaje = in.readUTF();
 
-            salida.writeUTF("Conexión exitosa...\n envia un mensaje :D");
-
-            //Recepcion de mensaje
-            mensajeRecibido = entrada.readLine();
-            System.out.println(mensajeRecibido);
-
-            salida.writeUTF("Se recibio el mensaje.\n Terminando conexion...");
-            salida.writeUTF("Gracias por conectarte, adios!");
-            System.out.println("Cerrando conexión...");
-            sc.close();//Aqui se cierra la conexión con el cliente
+                procesarTexto(mensaje);
+                String respuesta  = ManejadorErrores.getInstance().getErrores();
+                
+                out.writeUTF(respuesta);
+                
+                sc.close();
+                sf.getjTextPane().setText("Cliente desconectado");
+                System.out.println("Cliente desconectado");
+                
+            }
 
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
         }
     }
-    
 
     public void procesarTexto(String entrada) {
         String entrada1 = entrada.substring(1, entrada.indexOf(")"));

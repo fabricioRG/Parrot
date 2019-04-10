@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.util.LinkedList;
 import java.util.List;
 import server.backend.clase.ManejadorClase;
+import server.backend.error.ManejadorErrores;
 import server.backend.manejadores.ManejadorParser;
 import server.backend.paginaweb.ManejadorPaginaWeb;
 
@@ -70,6 +71,7 @@ public class ManejadorComponente {
                     if (ManejadorClase.getInstance().getClase() != null) {
                         comp.setClase(ManejadorClase.getInstance().getClase());
                         listaComponente.add(comp);
+                        ManejadorErrores.getInstance().accionExitosa("Se ha creado el componente \"" + comp.getId() +" \"");
                     } else {
                         errores = 1;
                         throw new Exception("No es posible agregar el componente '" + comp.getId() + "'. Error en clase");
@@ -107,13 +109,13 @@ public class ManejadorComponente {
                     if (ManejadorClase.getInstance().getClase() != null) {
                         comp.setClase(ManejadorClase.getInstance().getClase());
                         getComponenteById(comp.getId()).setClase(comp.getClase());
+                        ManejadorErrores.getInstance().accionExitosa("Se ha modificado el componente \"" + comp.getId() +" \"");
                     } else {
                         throw new Exception("No es posible agregar el componente '" + comp.getId() + "'. Error en clase");
                     }
                 } else {
                     errores = 0;
                 }
-                System.out.println("");
                 break;
         }
     }
@@ -154,6 +156,7 @@ public class ManejadorComponente {
                 break;
             case 4:
                 if (errores == 0) {
+                    ManejadorErrores.getInstance().accionExitosa("Se ha eliminado el componente \"" + comp.getId() +" \"");
                     removeComponenteById(comp.getId());
                 } else {
                     errores = 0;
@@ -164,7 +167,6 @@ public class ManejadorComponente {
 
     public void removeComponentesByPaginaId(String id) {
         List<Componente> componentes = new LinkedList<>();
-        System.out.println("");
         for (Componente componente : listaComponente) {
             if (!componente.getPagina().getId().equals(id)) {
                 componentes.add(componente);
@@ -174,12 +176,10 @@ public class ManejadorComponente {
         if (!componentes.isEmpty()) {
             listaComponente.addAll(componentes);
         }
-        System.out.println("");
     }
 
     public void removeComponenteById(String id) {
         List<Componente> componentes = new LinkedList<>();
-        System.out.println("");
         for (Componente componente : listaComponente) {
             if (!componente.getId().equals(id)) {
                 componentes.add(componente);
@@ -189,7 +189,6 @@ public class ManejadorComponente {
         if (!componentes.isEmpty()) {
             listaComponente.addAll(componentes);
         }
-        System.out.println("");
     }
 
     public Componente getComponenteById(String id) {

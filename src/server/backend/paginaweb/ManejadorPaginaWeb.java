@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import server.backend.componente.ManejadorComponente;
+import server.backend.error.ManejadorErrores;
 import server.backend.etiqueta.Etiqueta;
 import server.backend.etiqueta.EtiquetaBuilder;
 import server.backend.etiqueta.ManejadorEtiqueta;
@@ -134,7 +135,7 @@ public class ManejadorPaginaWeb {
                 }
                 if (errores == 0) {
                     listaPaginaWeb.add(pw);
-                    System.out.println(pw.getId());
+                    ManejadorErrores.getInstance().accionExitosa("Se ha creado la pagina web \"" + pw.getId() +"\"");
                 } else {
                     errores = 0;
                     pw = null;
@@ -182,6 +183,7 @@ public class ManejadorPaginaWeb {
                 if (errores == 0) {
                     if (pw.getId() != null) {
                         if (modificacion == 1) {
+                            ManejadorErrores.getInstance().accionExitosa("Se ha modificado la pagina web \"" + pw.getId() +"\"");
                             modifyAtributosPagina(pw);
                             modificacion = 0;
                         } else {
@@ -225,6 +227,7 @@ public class ManejadorPaginaWeb {
                 break;
             case 3:
                 if(errores == 0){
+                    ManejadorErrores.getInstance().accionExitosa("Se ha eliminado la pagina web  \"" + pw.getId() +" \"");
                     removePaginaById(pw.getId());
                 } else {
                     errores = 0;
@@ -235,7 +238,6 @@ public class ManejadorPaginaWeb {
     
     public void removePaginasBySitioId(String id){
         List<PaginaWeb> paginas = new LinkedList<>();
-        System.out.println("");
         for (PaginaWeb paginaWeb : listaPaginaWeb) {
             if(paginaWeb.getSitio().getId().equals(id)){
                 ManejadorComponente.getInstance().removeComponentesByPaginaId(paginaWeb.getId());
@@ -248,12 +250,10 @@ public class ManejadorPaginaWeb {
             listaPaginaWeb.addAll(paginas);
         }
         
-        System.out.println("");
     }
     
     public void removePaginaById(String id){
         List<PaginaWeb> paginas = new LinkedList<>();
-        System.out.println("");
         for (PaginaWeb paginaWeb : listaPaginaWeb) {
             if(paginaWeb.getId().equals(id)){
                 ManejadorComponente.getInstance().removeComponentesByPaginaId(id);
@@ -265,13 +265,11 @@ public class ManejadorPaginaWeb {
         if(!paginas.isEmpty()){
             listaPaginaWeb.addAll(paginas);
         }
-        System.out.println("");
     }
 
     private void modifyAtributosPagina(PaginaWeb pg) {
         if (pg.getTitulo() != null) {
             getPaginaWebById(pg.getId()).setTitulo(pg.getTitulo());
-            System.out.println(getPaginaWebById(pg.getId()).getTitulo());
         }
         if (pg.getEtiquetaCabeza() != null) {
             getPaginaWebById(pg.getId()).setEtiquetaCabeza(pg.getEtiquetaCabeza());

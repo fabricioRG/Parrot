@@ -61,7 +61,6 @@ private Video video = null;
         } else if (video.getAltura() == 0 || video.getAncho() == 0){
             throw new Exception("Altura y/u origen en clase \"Video\" vacio. Intentelo de nuevo");
         }
-        System.out.println(video.getOrigen());
         return video;
     }
 }

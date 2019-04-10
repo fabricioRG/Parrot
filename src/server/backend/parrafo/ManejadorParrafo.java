@@ -50,7 +50,6 @@ public class ManejadorParrafo {
         if(parrafo.getTexto() == null){
             throw new Exception("Texto en clase \"Parrafo\" vacio. Intentelo de nuevo");
         }
-        System.out.println(parrafo.getTexto());
         return parrafo;
     }
 }

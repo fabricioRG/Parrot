@@ -58,7 +58,6 @@ private Titulo titulo = null;
         if(titulo.getTexto() == null){
             throw new Exception("Texto en clase \"Titulo\" vacio. Intentelo de nuevo.");
         }
-        System.out.println(titulo.getTexto());
         return titulo;
     }
     

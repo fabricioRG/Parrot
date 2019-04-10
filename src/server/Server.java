@@ -1,5 +1,6 @@
 package server;
 
+import server.backend.error.ManejadorErrores;
 import server.backend.manejadores.Connector;
 import server.backend.xml.ImportadorXML;
 

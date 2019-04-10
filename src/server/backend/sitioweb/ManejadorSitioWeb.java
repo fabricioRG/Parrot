@@ -9,6 +9,7 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.zip.DataFormatException;
+import server.backend.error.ManejadorErrores;
 import server.backend.manejadores.ManejadorParser;
 import server.backend.paginaweb.ManejadorPaginaWeb;
 import server.backend.xml.ExportadorXML;
@@ -90,10 +91,8 @@ public class ManejadorSitioWeb {
                     }
                     sw.setPath(ABSOLUTH_PATH_SERVER + "/" + sw.getId());
                     errores = 0;
+                    ManejadorErrores.getInstance().accionExitosa("Se ha creado el sitio web  \"" + sw.getId() +" \"");
                     listaSitioWeb.add(sw);
-//                createDirectory("/" + sw.getId());
-//                ExportadorXML.getInstance().exportarSitioWeb(sw);
-                    System.out.println(sw.getId());
                 }
         }
     }
@@ -117,6 +116,7 @@ public class ManejadorSitioWeb {
                 break;
             case 3:
                 if(errores == 0){
+                    ManejadorErrores.getInstance().accionExitosa("Se ha eliminado el sitio web  \"" + sw.getId() +" \"");
                     removeSitioWeb(sw.getId());
                 } else {
                     errores = 0;
@@ -127,7 +127,6 @@ public class ManejadorSitioWeb {
 
     public void removeSitioWeb(String id) {
         List<SitioWeb> sitios = new LinkedList<>();
-        System.out.println("");
         for (SitioWeb sitioWeb : listaSitioWeb) {
             if(sitioWeb.getId().equals(id)){
             ManejadorPaginaWeb.getInstance().removePaginasBySitioId(id);
@@ -139,7 +138,6 @@ public class ManejadorSitioWeb {
         if(!sitios.isEmpty()){
             listaSitioWeb.addAll(sitios);
         }
-        System.out.println("");
     }
 
     public SitioWeb getSitioWebById(String id) {
