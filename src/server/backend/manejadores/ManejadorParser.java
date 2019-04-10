@@ -7,6 +7,7 @@ import server.backend.clase.ManejadorClase;
 import server.backend.componente.ManejadorComponente;
 import server.backend.error.ManejadorErrores;
 import server.backend.etiqueta.ManejadorEtiqueta;
+import server.backend.html.ManejadorHTML;
 import server.backend.imagen.ManejadorImagen;
 import server.backend.menu.ManejadorMenu;
 import server.backend.paginaweb.ManejadorPaginaWeb;
@@ -155,6 +156,7 @@ public class ManejadorParser {
 
     public void updateBaseDatos(){
         ExportadorXML.getInstance().exportarXML();
+        ManejadorHTML.getInstance().updateServidor();
     }
     
     public boolean isId(String id) {

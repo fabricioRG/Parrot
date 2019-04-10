@@ -89,6 +89,7 @@ public class ManejadorPaginaWeb {
                 }
                 break;
             case 4:
+                if(paramet.equals(paramet))
                 if (getPaginaWebById(paramet) != null) {
                     if (getPaginaWebById(paramet).getSitio().getId().equals(pw.getSitio().getId())) {
                         pw.setPadre(getPaginaWebById(paramet));

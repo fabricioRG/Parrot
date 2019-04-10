@@ -9,8 +9,10 @@ import java.util.LinkedList;
 import java.util.List;
 import server.backend.componente.Componente;
 import server.backend.componente.ManejadorComponente;
+import server.backend.etiqueta.Etiqueta;
 import server.backend.imagen.Imagen;
 import server.backend.manejadores.ManejadorParser;
+import server.backend.menu.Menu;
 import server.backend.paginaweb.ManejadorPaginaWeb;
 import server.backend.paginaweb.PaginaWeb;
 import server.backend.parrafo.Parrafo;
@@ -74,6 +76,8 @@ public class ExportadorXML {
     public static final String MENU_CE = "</menu>";
     public static final String ETIQUETA_AB = "<etiqueta>";
     public static final String ETIQUETA_CE = "</etiqueta>";
+    public static final String ETIQUETAS_AB = "<etiquetas>";
+    public static final String ETIQUETAS_CE = "</etiquetas>";
     public static final String PATH_AB = "<path>";
     public static final String PATH_CE = "</path>";
     public static final String CORCH_ABIERTO = "[";
@@ -122,10 +126,12 @@ public class ExportadorXML {
     private String getSitioWebXML(SitioWeb sw) {
         String accion = "";
         if (sw.getFechaCreacion() == null) {
-
+            Date fecha = new Date();
+            sw.setFechaCreacion(fecha);
         }
         if (sw.getFechaModificacion() == null) {
-
+            Date fecha = new Date();
+            sw.setFechaModificacion(fecha);
         }
         if (sw.getUsuarioCreacion() == null) {
             sw.setUsuarioCreacion(ManejadorParser.getInstance().getUsuario().getId());
@@ -201,7 +207,7 @@ public class ExportadorXML {
         String usuarioModificacion = USUARIO_MOD_AB + CORCH_ABIERTO + pw.getUsuarioModificacion() + CORCH_CERRADO
                 + USUARIO_MOD_CE + SALTO_LN;
         salida = salida + usuarioCreacion + fechaCreacion + fechaModificacion + usuarioModificacion + getComponenteXML(pw)
-                + PAGINA_WEB_CE + SALTO_LN;
+                + getEtiquetaXML(pw.getEtiquetaCabeza())+ PAGINA_WEB_CE + SALTO_LN;
         return salida;
     }
 
@@ -223,6 +229,8 @@ public class ExportadorXML {
 
     private String getCompXML(Componente comp) {
         String salida = COMPONENTE_AB + SALTO_LN;
+        String id = ID_AB + CORCH_ABIERTO + comp.getId() + CORCH_CERRADO + ID_CE + SALTO_LN;
+        salida = salida + id;
         if (comp.getClase().getTitulo() != null) {
             salida = salida + getTituloXML(comp.getClase().getTitulo());
         } else if (comp.getClase().getParrafo() != null) {
@@ -232,9 +240,22 @@ public class ExportadorXML {
         } else if (comp.getClase().getVideo() != null) {
             salida = salida + getVideoXML(comp.getClase().getVideo());
         } else if (comp.getClase().getMenu() != null) {
-
+            salida = salida + getMenuXML(comp.getClase().getMenu());
         }
         salida = salida + COMPONENTE_CE + SALTO_LN;
+        return salida;
+    }
+
+    private String getEtiquetaXML(Etiqueta etiqueta) {
+        String salida = ETIQUETAS_AB + SALTO_LN;
+        Etiqueta i = etiqueta;
+        if (etiqueta != null) {
+            while (i != null) {
+                salida = salida + ETIQUETA_AB + CORCH_ABIERTO + i.getValor() + CORCH_CERRADO + ETIQUETA_CE + SALTO_LN;
+                i = i.getSiguienteEtiqueta();
+            }
+        }
+        salida = salida + ETIQUETAS_CE + SALTO_LN;
         return salida;
     }
 
@@ -292,6 +313,32 @@ public class ExportadorXML {
         String ancho = ANCHO_AB + CORCH_ABIERTO + video.getAncho() + CORCH_CERRADO + ANCHO_CE + SALTO_LN;
         salida = salida + origen + altura + ancho;
         salida = salida + VIDEO_CE + SALTO_LN;
+        return salida;
+    }
+    
+    private String getMenuXML(Menu menu){
+        String salida = MENU_AB + SALTO_LN;
+        if(menu.getPadre() != null){
+            String padre = PADRE_AB + CORCH_ABIERTO + menu.getPadre().getId() + CORCH_CERRADO + PADRE_CE + SALTO_LN;
+        salida = salida + padre;
+        }
+        if(menu.getEtiquetas() != null){
+            salida = salida + getEtiqueta(menu.getEtiquetas());
+        }
+        salida = salida + MENU_CE + SALTO_LN;
+        return salida;
+    }
+    
+    private String getEtiqueta(Etiqueta etiqueta){
+        String salida = ETIQUETAS_AB;
+        salida = salida + CORCH_ABIERTO + etiqueta.getValor();
+        Etiqueta i = etiqueta.getSiguienteEtiqueta();
+        if(i != null){
+            salida = salida + "|" + i.getValor();
+            i = i.getSiguienteEtiqueta();
+        }
+        salida = salida + CORCH_CERRADO;
+        salida = salida + ETIQUETAS_CE + SALTO_LN;
         return salida;
     }
 
